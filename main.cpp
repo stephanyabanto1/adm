@@ -34,11 +34,11 @@ int main()
     }
 
     while (true) {
-        pwmWrite(pin, 50);
+        pwmWrite(Servo1Pin, 50);
         delay(1000);
-        pwmWrite(pin, 150);
+        pwmWrite(Servo1Pin, 150);
         delay(1000);
-        pwmWrite(pin, 250);
+        pwmWrite(Servo1Pin, 250);
         delay(1000);
     }  
 
