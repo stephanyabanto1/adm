@@ -4,14 +4,14 @@
 
 int main()
 {
-    int Servo1 = 1;
+    int Servo1Pin = 1;
 
     int error = softPwmCreate(Servo1, 50, 100);
 
     if(error != 0) {
         std::cout << "error initializing PWM fn";
     } else {
-        softPwmWrite(Servo1, 25);
+        softPwmWrite(Servo1, 5);
     }
 
     return 0;
