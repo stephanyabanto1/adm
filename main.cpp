@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 
 int main()
 {
-	printf("hello world\n:");
-	return 0;
+    return 0;
 }
