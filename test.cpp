@@ -1,6 +1,9 @@
 #include <iostream>
+#include <string>
 
 int main () {
-    std::cout << "fuck you this is a test" << std::endl;
- return 0;
+    std::string str = "fuck you this is a test";
+
+    std::cout << str << std::endl;
+    return 0;
 }
