@@ -11,9 +11,15 @@ void err(std::string str) {
 int main()
 {
     int error = 0;
-    int Servo1Pin = 1;
+    int Servo1Pin = 6;
 
-    error = wiringPiSetup();
+    error = wiringPiSetupGpio();
+
+    pinMode(Servo1Pin, PWM_OUTPUT);
+    pwmSetMode(PWM_MODE_MS);
+
+    pwmSetClock(192);
+    pwmSetRange(2000);
 
     if(error != 0) {
         err("error starting wiring pi");
@@ -27,7 +33,14 @@ int main()
         return 0;
     }
 
-    while( true ) {
-        softPwmWrite(Servo1Pin, 5);
-    }    
+    while (true) {
+        pwmWrite(pin, 50);
+        delay(1000);
+        pwmWrite(pin, 150);
+        delay(1000);
+        pwmWrite(pin, 250);
+        delay(1000);
+    }  
+
+    return 0;
 }
