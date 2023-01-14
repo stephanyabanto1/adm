@@ -23,7 +23,7 @@ int main()
     error = softPwmCreate(Servo1Pin, 50, 100);
 
     if(error != 0) {
-        err("error initializing PWM fn")
+        err("error initializing PWM fn");
         return 0;
     }
 

@@ -5,7 +5,7 @@ main:
 test:
 	gcc test.cpp -lstdc++ -o test
 	./test
+	rm test
 
 clean: 
-	rm test
 	rm exec
