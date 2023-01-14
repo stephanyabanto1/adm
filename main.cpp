@@ -6,12 +6,12 @@ int main()
 {
     int Servo1Pin = 1;
 
-    int error = softPwmCreate(Servo1, 50, 100);
+    int error = softPwmCreate(Servo1Pin, 50, 100);
 
     if(error != 0) {
         std::cout << "error initializing PWM fn";
     } else {
-        softPwmWrite(Servo1, 5);
+        softPwmWrite(Servo1Pin, 5);
     }
 
     return 0;
