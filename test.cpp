@@ -1,7 +1,6 @@
 #include <iostream>
 
-int main()
-{
-	std::cout << "Hello world";
-    return 0;
+int main () {
+    std::cout << "fuck you this is a test" << endl;
+ return 0;
 }

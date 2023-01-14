@@ -1,5 +1,5 @@
 main:
-	gcc main.cpp -o exec -lwiringPi -lpthread
+	gcc main.cpp -lstdc++ -lwiringPi -lpthread -o exec 
 
 test:
-	gcc test.cpp -o test
+	gcc test.cpp -lstdc++ -o test
