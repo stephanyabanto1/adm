@@ -10,7 +10,7 @@ void err(std::string str) {
 
 int main()
 {
-    int pin = 1;
+    int pin = 18;
 
     printf("Raspberry Pi wiringPi test program\n");
     wiringPiSetupGpio();
