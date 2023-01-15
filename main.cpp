@@ -18,8 +18,8 @@ int main()
         50 - 743
     */
     int angle = 50;
-
-    int error = wiringPiSetupGpio();
+    
+    error = wiringPiSetupGpio();
     if(error != 0) err("wiring pi didn't set up");
 
     pinMode(pin, PWM_OUTPUT);
