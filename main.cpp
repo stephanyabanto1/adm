@@ -15,7 +15,7 @@ int main()
     
     /*
     angle must be between:
-        50 - 743
+        83 - 743
     */
     int angle = 50;
 
