@@ -18,7 +18,7 @@ int main()
         50 - 743
     */
     int angle = 50;
-    
+
     error = wiringPiSetupGpio();
     if(error != 0) err("wiring pi didn't set up");
 
@@ -30,6 +30,7 @@ int main()
 
     while (true) {
         std::cin >> angle;
+        std::cout << "setting angle to: " << angle;
         pwmWrite(pin, angle);
     }
 
