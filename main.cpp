@@ -30,8 +30,9 @@ int main()
 
     while (true) {
         std::cin >> angle;
-        std::cout << "setting angle to: " << angle;
+        std::cout << "setting angle to: " << angle << std::endl;
         pwmWrite(pin, angle);
+        delay(1000);
     }
 
     return 0;
