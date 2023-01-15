@@ -10,10 +10,18 @@ void err(std::string str) {
 
 int main()
 {
+    int error = 0;
     int pin = 18;
+    
+    /*
+    angle must be between:
+        50 - 743
+    */
+    int angle = 50;
 
-    printf("Raspberry Pi wiringPi test program\n");
-    wiringPiSetupGpio();
+    int error = wiringPiSetupGpio();
+    if(error != 0) err("wiring pi didn't set up");
+
     pinMode(pin, PWM_OUTPUT);
     pwmSetMode(PWM_MODE_MS);
 
@@ -21,12 +29,8 @@ int main()
     pwmSetRange(2000);
 
     while (true) {
-        pwmWrite(pin, 50);
-        delay(1000);
-        pwmWrite(pin, 150);
-        delay(1000);
-        pwmWrite(pin, 250);
-        delay(1000);
+        std::cin >> angle;
+        pwmWrite(pin, angle);
     }
 
     return 0;
