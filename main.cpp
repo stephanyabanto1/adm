@@ -15,9 +15,9 @@ int main()
     
     /*
     angle must be between:
-        50 - 743
+        83 - 743
     */
-    int angle = 50;
+    int angle = 83;
 
     error = wiringPiSetupGpio();
     if(error != 0) err("wiring pi didn't set up");
