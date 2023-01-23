@@ -55,7 +55,7 @@ int main(){
 	float Ax=0, Ay=0, Az=0;
 	float Gx=0, Gy=0, Gz=0;
 
-    float Ax=0, Ay=0, Az=0;
+    float Dx=0, Dy=0, Dz=0;
     float Px=0, Py=0, Pz=0;
 
 
@@ -86,12 +86,12 @@ int main(){
         Py += Ay * (delay_time * delay_time);
         Pz += Az * (delay_time * delay_time);
 
-        Ax += Gx;
-        Ay += Gy;
-        Az += Gz;
+        Dx += Gx;
+        Dy += Gy;
+        Dz += Gz;
 
 		// printf("\n Gx=%.3f °/s\tGy=%.3f °/s\tGz=%.3f °/s\tAx=%.3f g\tAy=%.3f g\tAz=%.3f g\n",Gx,Gy,Gz,Ax,Ay,Az);
-		printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Ax,Ay,Az);
+		printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
         system("CLS");
 		delay(delay_time);
 		
