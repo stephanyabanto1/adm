@@ -90,7 +90,7 @@ int main(){
 		// printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
 		printf("\r%f,%f,%f", Gx, Gy, Gz);
 		fflush(stdout);
-		delay(200)
+		delay(delay_time);
 	}
 	return 0;
 }
