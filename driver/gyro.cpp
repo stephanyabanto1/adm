@@ -89,6 +89,7 @@ int main(){
 		// printf("\n Gx=%.3f °/s\tGy=%.3f °/s\tGz=%.3f °/s\tAx=%.3f g\tAy=%.3f g\tAz=%.3f g\n",Gx,Gy,Gz,Ax,Ay,Az);
 		// printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
 		printf("%.3f,%.3f,%.3f",Dx,Dy,Dz);
+		fflush(stdout);
 		delay(delay_time);
 	}
 	return 0;
