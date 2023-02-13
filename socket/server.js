@@ -10,7 +10,7 @@ io.on("connection", (socket) => {
 
 
   socket.on("gyro", (data)=> {
-    console.clear();
+    // console.clear();
     console.log(data);
   })
 });

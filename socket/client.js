@@ -9,7 +9,8 @@ socket.on("connect", ()=> {
     console.log("connected")
 })
 
-async ()=>{
+(async ()=>{
+    console.log("running build...")
 
     await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
         cwd: "../driver"
@@ -25,6 +26,8 @@ async ()=>{
         }
     })
 
+    console.log("running exec...")
+
     child = await spawnSync('./exec', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
         cwd: "../driver"
@@ -33,4 +36,4 @@ async ()=>{
     child.stdout.on("data", (data)=>{
         socket.emit("gyro", data)
     })
-}
+})()
