@@ -13,7 +13,7 @@ io.on("connection", (socket) => {
     const string = Buffer.from(data).toString()
 
     console.log(string);
-    console.clear();
+    // console.clear();
   })
 });
 
