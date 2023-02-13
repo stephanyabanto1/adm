@@ -1,5 +1,5 @@
 const {io} = require("socket.io-client");
-const { spawnSync, execSync } = require("child_process");
+const { spawn, execSync } = require("child_process");
 
 console.log("connecting to server...")
 
@@ -12,7 +12,7 @@ socket.on("connect", ()=> {
 
 const exec = async ()=>{
     
-    console.log("running build...")
+    console.log("running build...");
 
     await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
         cwd: "../driver"
@@ -27,17 +27,17 @@ const exec = async ()=>{
             console.error("BUILD ERROR: ",err)
             // rejects("Subprocess error: ", err)
         }
-    })
+    });
 
-    console.log("running exec...")
+    console.log('\x1b[32m%s\x1b[0m', "running exec...");
 
-    const child = await spawnSync('./exec', [] ,{
+    const child = spawn('./exec', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
         cwd: "../driver"
-    })
+    });
 
     child.stdout.on("data", (data)=>{
-        console.log(data)
-        socket.emit("gyro", data)
-    })
+        console.log(data);
+        socket.emit("gyro", data);
+    });
 }
