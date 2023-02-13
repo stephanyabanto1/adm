@@ -3,7 +3,8 @@ const { spawn, execSync } = require("child_process");
 
 console.log("connecting to server...")
 
-const socket = io("http://192.168.0.14:3000");
+// const socket = io("http://192.168.0.14:3000");
+const socket = io("http://192.168.2.15:3000");
 
 socket.on("connect", ()=> {
     console.log("connected")
