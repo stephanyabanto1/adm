@@ -11,7 +11,8 @@ io.on("connection", (socket) => {
 
   socket.on("gyro", (data)=> {
     // console.clear();
-    console.log(data);
+    
+    console.log( Buffer.from(data).toString() );
   })
 });
 

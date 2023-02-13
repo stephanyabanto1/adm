@@ -1,8 +1,17 @@
-#include <wiringPiI2C.h>
+// #include <wiringPiI2C.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#include <wiringPi.h>
+// #include <wiringPi.h>
+#include <chrono>
+
+typedef std::chrono::high_resolution_clock Time;
+typedef std::chrono::milliseconds ms;
+typedef std::chrono::duration<float> fsec;
+auto t0 = Time::now();
+auto t1 = Time::now();
+fsec fs;
+
 
 #define Device_Address 0x68	/*Device Address/Identifier for MPU6050*/
 
@@ -20,6 +29,8 @@
 
 int fd;
 int delay_time = 50;
+
+
 
 void MPU6050_Init(){
 	
@@ -45,52 +56,64 @@ void ms_delay(int val){
 }
 
 int main(){
-	
-	float Acc_x,Acc_y,Acc_z;
+	float AccX, AccY, AccZ;
+	float GyroX, GyroY, GyroZ;
+	float accAngleX, accAngleY, gyroAngleX, gyroAngleY, gyroAngleZ;
+	float roll, pitch, yaw;
+	float AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
+	float elapsedTime, currentTime, previousTime;
+	int c = 0;
+
 	float Gyro_x,Gyro_y,Gyro_z;
 	float Ax=0, Ay=0, Az=0;
 	float Gx=0, Gy=0, Gz=0;
 
     float Dx=0, Dy=0, Dz=0;
     float Px=0, Py=0, Pz=0;
+	
 
-
-	fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
+	// fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
 	MPU6050_Init();		                 /* Initializes MPU6050 */
 	
 	while(1)
 	{
 		/*Read raw value of Accelerometer and gyroscope from MPU6050*/
-		Acc_x = read_raw_data(ACCEL_XOUT_H);
-		Acc_y = read_raw_data(ACCEL_YOUT_H);
-		Acc_z = read_raw_data(ACCEL_ZOUT_H);
+		AccX = read_raw_data(ACCEL_XOUT_H)/16384.0;;
+		AccY = read_raw_data(ACCEL_YOUT_H)/16384.0;;
+		AccZ = read_raw_data(ACCEL_ZOUT_H)/16384.0;;
+
+		accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - 0.58; // AccErrorX ~(0.58) See the calculate_IMU_error()custom function for more details
+  		accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) + 1.58; // 
+
+		previousTime = currentTime;
+		t0 = Time::now();
+    	t1 = Time::now();
+
+		fs = t1 - t0;
+
+		currentTime = fs.count();
+		elapsedTime = (currentTime - previousTime) / 1000; 
 		
-		Gyro_x = read_raw_data(GYRO_XOUT_H);
-		Gyro_y = read_raw_data(GYRO_YOUT_H);
-		Gyro_z = read_raw_data(GYRO_ZOUT_H);
-		
-		/* Divide raw value by sensitivity scale factor */
-		Ax = Acc_x/16384.0;
-		Ay = Acc_y/16384.0;
-		Az = Acc_z/16384.0;
+		GyroX = read_raw_data(GYRO_XOUT_H)/ 131.0;
+		GyroY  = read_raw_data(GYRO_YOUT_H)/ 131.0;
+		GyroZ = read_raw_data(GYRO_ZOUT_H)/ 131.0;
 
-		Gx = Gyro_x/131;
-		Gy = Gyro_y/131;
-		Gz = Gyro_z/131;
+        GyroX = GyroX + 0.56; // GyroErrorX ~(-0.56)
+		GyroY = GyroY - 2; // GyroErrorY ~(2)
+		GyroZ = GyroZ + 0.79; // GyroErrorZ ~ (-0.8)
 
-        Px += Ax * (delay_time * delay_time);
-        Py += Ay * (delay_time * delay_time);
-        Pz += Az * (delay_time * delay_time);
+		gyroAngleX = gyroAngleX + GyroX * elapsedTime; // deg/s * s = deg
+		gyroAngleY = gyroAngleY + GyroY * elapsedTime;
+		yaw =  yaw + GyroZ * elapsedTime;
 
-        Dx += Gx;
-        Dy += Gy;
-        Dz += Gz;
-
+		roll = 0.96 * gyroAngleX + 0.04 * accAngleX;
+  		pitch = 0.96 * gyroAngleY + 0.04 * accAngleY;
 		// printf("\n Gx=%.3f °/s\tGy=%.3f °/s\tGz=%.3f °/s\tAx=%.3f g\tAy=%.3f g\tAz=%.3f g\n",Gx,Gy,Gz,Ax,Ay,Az);
 		// printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
-		printf("%.3f,%.3f,%.3f",Dx,Dy,Dz);
+		printf("%.3f,%.3f,%.3f",yaw,roll,pitch);
+
 		fflush(stdout);
-		delay(delay_time);
+		// delay(delay_time);
 	}
 	return 0;
 }

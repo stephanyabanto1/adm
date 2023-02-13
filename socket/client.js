@@ -14,7 +14,7 @@ const exec = async ()=>{
     
     console.log("running build...");
 
-    await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
+    await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -lchrono -o exec', {
         cwd: "../driver"
     }, (err, stdout, stderr) => {
         if(!err) {
@@ -37,7 +37,7 @@ const exec = async ()=>{
     });
 
     child.stdout.on("data", (data)=>{
-        console.log(data);
+        // console.log(data);
         socket.emit("gyro", data);
     });
 }
