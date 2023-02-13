@@ -1,14 +1,6 @@
 const {io} = require("socket.io-client");
 const { spawnSync, execSync } = require("child_process");
 
-const socket = io("http://192.168.0.14:3000");
-
-let child;
-
-socket.on("connect", ()=> {
-    console.log("connected")
-})
-
 const exec = async ()=>{
     console.log("running build...")
 
@@ -28,14 +20,21 @@ const exec = async ()=>{
 
     console.log("running exec...")
 
-    child = await spawnSync('./exec', [] ,{
+    const child = await spawnSync('./exec', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
         cwd: "../driver"
     })
 
+    console.log("connecting to server...")
+
+    const socket = io("http://192.168.0.14:3000");
+
+    socket.on("connect", ()=> {
+        console.log("connected")
+    })
+    
     child.stdout.on("data", (data)=>{
         socket.emit("gyro", data)
     })
 }
 
-// exec();
