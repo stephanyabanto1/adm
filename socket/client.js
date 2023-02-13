@@ -1,14 +1,16 @@
 const {io} = require("socket.io-client");
 const { spawnSync, execSync } = require("child_process");
 
+console.log("connecting to server...")
+
+const socket = io("http://192.168.0.14:3000");
+
+socket.on("connect", ()=> {
+    console.log("connected")
+    exec();
+})
+
 const exec = async ()=>{
-    console.log("connecting to server...")
-
-    const socket = io("http://192.168.0.14:3000");
-
-    socket.on("connect", ()=> {
-        console.log("connected")
-    })
     
     console.log("running build...")
 
@@ -37,5 +39,3 @@ const exec = async ()=>{
         socket.emit("gyro", data)
     })
 }
-
-exec();
