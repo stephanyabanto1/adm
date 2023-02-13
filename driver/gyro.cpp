@@ -92,7 +92,9 @@ int main(){
 
 		previousTime = currentTime;
 		t0 = Time::now();
-		fs = t0;
+    	t1 = Time::now();
+
+		fs = t1 - t0;
 
 		currentTime = fs.count();
 		elapsedTime = (currentTime - previousTime) / 1000; 
