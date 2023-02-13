@@ -2,6 +2,14 @@ const {io} = require("socket.io-client");
 const { spawnSync, execSync } = require("child_process");
 
 const exec = async ()=>{
+    console.log("connecting to server...")
+
+    const socket = io("http://192.168.0.14:3000");
+
+    socket.on("connect", ()=> {
+        console.log("connected")
+    })
+    
     console.log("running build...")
 
     await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
@@ -25,14 +33,6 @@ const exec = async ()=>{
         cwd: "../driver"
     })
 
-    console.log("connecting to server...")
-
-    const socket = io("http://192.168.0.14:3000");
-
-    socket.on("connect", ()=> {
-        console.log("connected")
-    })
-    
     child.stdout.on("data", (data)=>{
         socket.emit("gyro", data)
     })
