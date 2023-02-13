@@ -25,7 +25,7 @@ async ()=>{
         }
     })
 
-    child = await spawnSync('./a', [] ,{
+    child = await spawnSync('./exec', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
         cwd: "../driver"
     })
