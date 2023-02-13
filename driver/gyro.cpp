@@ -91,12 +91,10 @@ int main(){
   		accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / M_PI) + 1.58; // 
 
 		previousTime = currentTime;
-		// t0 = Time::now();
-    	// t1 = Time::now();
+		t0 = Time::now();
+		fs = t0;
 
-		// fs = t1 - t0;
-
-		currentTime = Time::now();
+		currentTime = fs.count();
 		elapsedTime = (currentTime - previousTime) / 1000; 
 		
 		GyroX = read_raw_data(GYRO_XOUT_H)/ 131.0;
@@ -114,7 +112,6 @@ int main(){
 
 		roll = 0.96 * gyroAngleX + 0.04 * accAngleX;
   		pitch = 0.96 * gyroAngleY + 0.04 * accAngleY;
-
 		// printf("\n Gx=%.3f °/s\tGy=%.3f °/s\tGz=%.3f °/s\tAx=%.3f g\tAy=%.3f g\tAz=%.3f g\n",Gx,Gy,Gz,Ax,Ay,Az);
 		// printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
 		printf("\r%f,%f,%f", yaw,roll,pitch);
