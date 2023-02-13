@@ -1,5 +1,5 @@
-#include <wiringPiI2C.h>
-#include <wiringPi.h>
+// #include <wiringPiI2C.h>
+// #include <wiringPi.h>
 
 #define _USE_MATH_DEFINES
  
@@ -11,12 +11,12 @@
 #include <cmath>
 #include <math.h>
 
-typedef std::chrono::high_resolution_clock Time;
-typedef std::chrono::milliseconds ms;
-typedef std::chrono::duration<float> fsec;
-auto t0 = Time::now();
-auto t1 = Time::now();
-fsec fs;
+
+using namespace std::chrono;
+
+milliseconds ms = duration_cast< milliseconds >(
+    system_clock::now().time_since_epoch()
+);
 
 #define Device_Address 0x68	/*Device Address/Identifier for MPU6050*/
 
@@ -35,8 +35,6 @@ fsec fs;
 int fd;
 int delay_time = 50;
 
-
-
 void MPU6050_Init(){
 	
 	wiringPiI2CWriteReg8 (fd, SMPLRT_DIV, 0x07);	/* Write to sample rate register */
@@ -46,6 +44,7 @@ void MPU6050_Init(){
 	wiringPiI2CWriteReg8 (fd, INT_ENABLE, 0x01);	/*Write to interrupt enable register */
 
 	} 
+
 short read_raw_data(int addr){
 	short high_byte,low_byte,value;
 	high_byte = wiringPiI2CReadReg8(fd, addr);
@@ -61,65 +60,48 @@ void ms_delay(int val){
 }
 
 int main(){
-	float AccX, AccY, AccZ;
-	float GyroX, GyroY, GyroZ;
-	float accAngleX, accAngleY, gyroAngleX, gyroAngleY, gyroAngleZ;
-	float roll, pitch, yaw;
-	float AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
-	float elapsedTime, currentTime, previousTime;
-	int c = 0;
-
-	float Gyro_x,Gyro_y,Gyro_z;
-	float Ax=0, Ay=0, Az=0;
-	float Gx=0, Gy=0, Gz=0;
-
-    float Dx=0, Dy=0, Dz=0;
-    float Px=0, Py=0, Pz=0;
-	
-
+	int16_t Acc_rawX, Acc_rawY, Acc_rawZ,Gyr_rawX, Gyr_rawY, Gyr_rawZ;
+	float Acceleration_angle[2];
+	float Gyro_angle[2];
+	float Total_angle[2];
+	float elapsedTime, time, timePrev;
+	int i;
+	float rad_to_deg = 180/3.141592654;
 	// fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
 	MPU6050_Init();		                 /* Initializes MPU6050 */
 	
 	while(1)
 	{
-		/*Read raw value of Accelerometer and gyroscope from MPU6050*/
-		AccX = read_raw_data(ACCEL_XOUT_H)/16384.0;;
-		AccY = read_raw_data(ACCEL_YOUT_H)/16384.0;;
-		AccZ = read_raw_data(ACCEL_ZOUT_H)/16384.0;;
-
-		accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / M_PI) - 0.58; // AccErrorX ~(0.58) See the calculate_IMU_error()custom function for more details
-  		accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / M_PI) + 1.58; // 
-
-		previousTime = currentTime;
-		t0 = Time::now();
-    	t1 = Time::now();
-
-		fs = t1 - t0;
-
-		currentTime = fs.count();
-		elapsedTime = (currentTime - previousTime) / 1000; 
+		timePrev = time;  // the previous time is stored before the actual time read
+		time = ms.count();  // actual time read
+		elapsedTime = (time - timePrev) / 1000;
 		
-		GyroX = read_raw_data(GYRO_XOUT_H)/ 131.0;
-		GyroY = read_raw_data(GYRO_YOUT_H)/ 131.0;
-		GyroZ = read_raw_data(GYRO_ZOUT_H)/ 131.0;
+		Acc_rawX = read_raw_data(ACCEL_XOUT_H);
+		Acc_rawY = read_raw_data(ACCEL_YOUT_H);
+		Acc_rawZ = read_raw_data(ACCEL_ZOUT_H);
+		
+		/*---X---*/
+		Acceleration_angle[0] = atan((Acc_rawY/16384.0)/sqrt(pow((Acc_rawX/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
+		/*---Y---*/
+		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
+		
+		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
+		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
+		Gyr_raw = read_raw_data(GYRO_ZOUT_H);
 
-        GyroX = GyroX + 0.56; // GyroErrorX ~(-0.56)
-		GyroY = GyroY - 2; // GyroErrorY ~(2)
-		GyroZ = GyroZ + 0.79; // GyroErrorZ ~ (-0.8)
+		/*---X---*/
+		Gyro_angle[0] = Gyr_rawX/131.0; 
+		/*---Y---*/
+		Gyro_angle[1] = Gyr_rawY/131.0;
 
-		gyroAngleX = gyroAngleX + GyroX * elapsedTime; // deg/s * s = deg
-		gyroAngleY = gyroAngleY + GyroY * elapsedTime;
+		/*---X axis angle---*/
+		Total_angle[0] = 0.98 *(Total_angle[0] + Gyro_angle[0]*elapsedTime) + 0.02*Acceleration_angle[0];
+		/*---Y axis angle---*/
+		Total_angle[1] = 0.98 *(Total_angle[1] + Gyro_angle[1]*elapsedTime) + 0.02*Acceleration_angle[1];
+		
 
-		yaw =  yaw + GyroZ * elapsedTime;
-
-		roll = 0.96 * gyroAngleX + 0.04 * accAngleX;
-  		pitch = 0.96 * gyroAngleY + 0.04 * accAngleY;
-		// printf("\n Gx=%.3f °/s\tGy=%.3f °/s\tGz=%.3f °/s\tAx=%.3f g\tAy=%.3f g\tAz=%.3f g\n",Gx,Gy,Gz,Ax,Ay,Az);
-		// printf("\n Px=%.3f °\tPy=%.3f °\tPz=%.3f °\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Px,Py,Pz,Dx,Dy,Dz);
-		printf("\r%f,%f,%f", GyroX,GyroY,GyroZ);
-
+		printf("\r%f,%f", Gyro_angle[0], Gyro_angle[1]);
 		fflush(stdout);
-		// delay(delay_time);
 	}
 	return 0;
 }
