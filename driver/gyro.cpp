@@ -33,7 +33,6 @@ milliseconds ms = duration_cast< milliseconds >(
 #define GYRO_ZOUT_H  0x47
 
 int fd;
-int delay_time = 50;
 
 void MPU6050_Init(){
 	
@@ -43,7 +42,7 @@ void MPU6050_Init(){
 	wiringPiI2CWriteReg8 (fd, GYRO_CONFIG, 24);	/* Write to Gyro Configuration register */
 	wiringPiI2CWriteReg8 (fd, INT_ENABLE, 0x01);	/*Write to interrupt enable register */
 
-	} 
+} 
 
 short read_raw_data(int addr){
 	short high_byte,low_byte,value;
@@ -67,7 +66,9 @@ int main(){
 	float elapsedTime, time, timePrev;
 	int i;
 	float rad_to_deg = 180/3.141592654;
-	// fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
+
+
+	fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
 	MPU6050_Init();		                 /* Initializes MPU6050 */
 	
 	while(1)
