@@ -10,9 +10,10 @@ io.on("connection", (socket) => {
 
 
   socket.on("gyro", (data)=> {
+    const string = Buffer.from(data).toString()
+
+    console.log(string+"?????????");
     // console.clear();
-    
-    console.log( Buffer.from(data).toString() );
   })
 });
 
