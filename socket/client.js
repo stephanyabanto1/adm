@@ -1,7 +1,7 @@
 const {io} = require("socket.io-client");
 const { spawnSync, execSync } = require("child_process");
 
-const socket = io("http://192.168.0.177:3000");
+const socket = io("http://192.168.0.14:3000");
 
 let child;
 
