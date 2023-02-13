@@ -91,7 +91,6 @@ int main(){
 		printf("\n\tAx=%.3f \tAy=%.3f g\tAz=%.3f g\n",Dx,Dy,Dz);
 
 		delay(delay_time);
-		system("clear");
 	}
 	return 0;
 }
