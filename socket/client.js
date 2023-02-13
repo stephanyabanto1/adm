@@ -24,6 +24,7 @@ const exec = async ()=>{
             // resolve()
             
         } else {
+            console.error("BUILD ERROR: ",err)
             // rejects("Subprocess error: ", err)
         }
     })
