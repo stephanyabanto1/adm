@@ -1,8 +1,8 @@
-// #include <wiringPiI2C.h>
+#include <wiringPiI2C.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-// #include <wiringPi.h>
+#include <wiringPi.h>
 #include <chrono>
 
 typedef std::chrono::high_resolution_clock Time;
