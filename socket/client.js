@@ -36,6 +36,7 @@ const exec = async ()=>{
     })
 
     child.stdout.on("data", (data)=>{
+        console.log(data)
         socket.emit("gyro", data)
     })
 }
