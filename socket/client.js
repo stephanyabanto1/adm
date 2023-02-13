@@ -11,7 +11,7 @@ socket.on("connect", ()=> {
 
 async ()=>{
 
-    execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
+    await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
         cwd: "../driver"
     }, (err, stdout, stderr) => {
         if(!err) {
@@ -25,7 +25,7 @@ async ()=>{
         }
     })
 
-    child = spawnSync('./a', [] ,{
+    child = await spawnSync('./a', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
         cwd: "../driver"
     })
