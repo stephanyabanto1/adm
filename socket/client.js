@@ -9,7 +9,7 @@ socket.on("connect", ()=> {
     console.log("connected")
 })
 
-(async ()=>{
+const exec = async ()=>{
     console.log("running build...")
 
     await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
@@ -36,4 +36,6 @@ socket.on("connect", ()=> {
     child.stdout.on("data", (data)=>{
         socket.emit("gyro", data)
     })
-})()
+}
+
+exec();
