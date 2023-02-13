@@ -5,6 +5,10 @@ const socket = io("http://192.168.0.177:3000");
 
 let child;
 
+socket.on("connect", ()=> {
+    console.log("connected")
+})
+
 async ()=>{
 
     execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec', {
