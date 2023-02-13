@@ -38,3 +38,4 @@ const exec = async ()=>{
     })
 }
 
+exec();
