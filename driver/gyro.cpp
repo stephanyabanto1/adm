@@ -1,10 +1,13 @@
 #include <wiringPiI2C.h>
 #include <wiringPi.h>
 
+#define _USE_MATH_DEFINES
+ 
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
 #include <chrono>
+#include <cmath>
 
 typedef std::chrono::high_resolution_clock Time;
 typedef std::chrono::milliseconds ms;
@@ -12,7 +15,6 @@ typedef std::chrono::duration<float> fsec;
 auto t0 = Time::now();
 auto t1 = Time::now();
 fsec fs;
-
 
 #define Device_Address 0x68	/*Device Address/Identifier for MPU6050*/
 
@@ -83,8 +85,8 @@ int main(){
 		AccY = read_raw_data(ACCEL_YOUT_H)/16384.0;;
 		AccZ = read_raw_data(ACCEL_ZOUT_H)/16384.0;;
 
-		accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / PI) - 0.58; // AccErrorX ~(0.58) See the calculate_IMU_error()custom function for more details
-  		accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / PI) + 1.58; // 
+		accAngleX = (atan(AccY / sqrt(pow(AccX, 2) + pow(AccZ, 2))) * 180 / M_PI) - 0.58; // AccErrorX ~(0.58) See the calculate_IMU_error()custom function for more details
+  		accAngleY = (atan(-1 * AccX / sqrt(pow(AccY, 2) + pow(AccZ, 2))) * 180 / M_PI) + 1.58; // 
 
 		previousTime = currentTime;
 		t0 = Time::now();
@@ -96,7 +98,7 @@ int main(){
 		elapsedTime = (currentTime - previousTime) / 1000; 
 		
 		GyroX = read_raw_data(GYRO_XOUT_H)/ 131.0;
-		GyroY  = read_raw_data(GYRO_YOUT_H)/ 131.0;
+		GyroY = read_raw_data(GYRO_YOUT_H)/ 131.0;
 		GyroZ = read_raw_data(GYRO_ZOUT_H)/ 131.0;
 
         GyroX = GyroX + 0.56; // GyroErrorX ~(-0.56)
