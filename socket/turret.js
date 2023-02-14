@@ -1,5 +1,9 @@
 let piblaster
-if(process.platform === 'linux') piblaster = require("pi-blaster.js")
+if(process.platform === 'linux'){
+    console.log("LINUX platform")
+    piblaster = require("pi-blaster.js")
+
+} 
 const ratio = 180 / 605
 
 const { io } = require("socket.io-client")
@@ -8,7 +12,7 @@ const socket = io("http://192.168.2.15:3000");
 
 
 socket.on("connect",() => {
-    socket.emit("purpose", "turret")
+    console.log("CONNECTION")
 })
 
 // piblaster 180 degree for servo is 0.06 - 0.24
