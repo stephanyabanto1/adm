@@ -12,7 +12,6 @@ io.on("connection", (socket) => {
     if(x){
       y = parseInt(y)
       io.emit("gyro-output", x, y);
-      io.emit("turret-pos", x, y)
     }
   })
 });
