@@ -23,7 +23,5 @@ function draw()
 socket.on("gyro-output", (x, y)=>{
     cx = x + 200
     cy = y + 200
-    // const string = Buffer.from(data).toString()
-    // console.clear();
-    // console.log(string);
+    console.log(x, y)
 })

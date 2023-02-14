@@ -20,9 +20,10 @@ socket.on("connect",() => {
 socket.on("gyro-output", (x, y)=>{
    // pin 4 is yaw
    console.log("x:", x, ' y:',y)
-   piblaster.setPwm(4, x /100 + 0.06)
+
+   piblaster.setPwm(4, x /180 + 0.06)
    // pin 17 is roll 
-   piblaster.setPwm(17, y /100 + 0.06)
+   piblaster.setPwm(17, y /180 + 0.06)
 })
 
 socket.on("canvas-pos", ( pos )=> {
