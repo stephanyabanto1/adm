@@ -5,14 +5,15 @@ const httpServer = createServer();
 const io = new Server(httpServer, { /* options */ });
 
 io.on("connection", (socket) => {
-
   console.log("connection")
-
-
   socket.on("gyro", (data)=> {
-    const string = Buffer.from(data).toString()
-    console.clear();
-    console.log(string);
+    let [x, y] = Buffer.from(data).toString().split(",")
+    x = parseInt(x);
+    if(x){
+      y = parseInt(y)
+      io.emit("gyro-output", x, y);
+      io.emit("turret-pos", x, y)
+    }
   })
 });
 
