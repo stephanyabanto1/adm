@@ -1,15 +1,35 @@
 const {io} = require("socket.io-client");
 const { spawn, execSync } = require("child_process");
 
+const ipAddresses = [
+    "http://192.168.2.15:3000",
+    "http://192.168.2.14:3000",
+    "http://192.168.0.100:3000"
+]
+const sockets = []
+let socket;
+
 console.log("connecting to server...")
 
-// const socket = io("http://192.168.0.14:3000");
-const socket = io("http://192.168.2.15:3000");
+for(let i = 0; i < ipAddresses.length; i++) {
+    sockets[i] = io(ipAddresses[i])
+    sockets[i].on("connect", ()=> {
+        socket = sockets[i];
+        console.log("CONNECTION");
+        flushSockets(i);
+        exec();
+    })
+}
 
-socket.on("connect", ()=> {
-    console.log("connected")
-    exec();
-})
+function flushSockets(exception) {
+    console.log("FLUSHING SOCKETS")
+    for(let i = 0; i < ipAddresses.length; i++) {
+        if(i !== exception){
+            sockets[i].close();
+            sockets[i] = null;
+        }
+    }
+}
 
 const exec = async ()=>{
     
