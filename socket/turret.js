@@ -40,13 +40,13 @@ function flushSockets(exception) {
 function initReciever() {
     console.log("INITIALIZING RECIEVER")
     // piblaster 180 degree for servo is 0.06 - 0.24
-    socket.on("gyro-output", (x, y)=>{
+    socket.on("gyro-output", (pitch, yaw)=>{
+        // console.log("pitch:", pitch, ' yaw:',yaw)
+        
         // pin 4 is yaw
-        console.log("x:", x, ' y:',y)
-    
-        piblaster.setPwm(4, x /180 + 0.06)
+        piblaster.setPwm(4, yaw)
         // pin 17 is roll 
-        piblaster.setPwm(17, y /180 + 0.06)
+        piblaster.setPwm(17, pitch)
     })
 }
 

@@ -16,8 +16,8 @@ io.on("connection", (socket) => {
     }
   })
 
-  socket.on("mouse-pos", (data)=> {
-    console.log(data)
+  socket.on("mouse-pos", (pitch, yaw)=> {
+    io.emit("gyro-output", pitch, yaw)
   })
 });
 
