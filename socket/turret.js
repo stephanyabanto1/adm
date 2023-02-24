@@ -46,7 +46,7 @@ function initReciever() {
         piblaster.setPwm(4, roll)
         // piblaster.setPwm(4, 0.08)
         // pin 17 is yaw 
-        piblaster.setPwm(17, yaw)
+        // piblaster.setPwm(17, yaw)
         // piblaster.setPwm(17, 0.14)
     })
 }
