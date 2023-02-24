@@ -56,10 +56,10 @@
 
     function emitMousePos (e) {
         const mousePos =  getMousePos(canvas, e)
-        const pitch = (mousePos.x / 2800) + 0.04
-        const yaw = (mousePos.y / 2800) + 0.04
-        pitch.toPrecision(5);
-        yaw.toPrecision(5);
+        let pitch = (mousePos.y / 2000) + 0.02
+        let yaw = (mousePos.x / 2000) + 0.02
+        pitch = pitch.toPrecision(5);
+        yaw = yaw.toPrecision(5);
         socket.emit("mouse-pos", pitch, yaw)
         traceMouse(mousePos)
         displayCoords({pitch, yaw}, mousePos)

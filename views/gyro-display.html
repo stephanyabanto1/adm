@@ -12,15 +12,13 @@
     </style>
 </head>
 <body>
-    <canvas style="border-style: solid;"></canvas>
-    <h1 id="angle"></h1>
-    <h1 id="mouse-pos"></h1>
-    <h3>hold click to control</h3>
+    <h1 id="pitch"></h1>
+    <h1 id="roll"></h1>
+    <h1 id="yaw"></h1>
 </body>
 <script src="http://192.168.0.109:3000/socket.io/socket.io.js"></script>
 <script>
     // const domain = (new URL(window.location.href));
-    const range = document.getElementById("myRange")
     
     const socket = io("http://192.168.0.109:3000");
     
@@ -30,6 +28,15 @@
     })
 </script>
 <script>
-   socket.on("gyro-output", (pitch, roll, yaw))
+    const pitchDis = document.getElementById("pitch")
+    const rollDis = document.getElementById("roll")
+    const yawDis = document.getElementById("yaw")
+
+   socket.on("gyro-output", (pitch, roll, yaw) => {
+    pitchDis.innerHTML = `Pitch: ${pitch}`;
+    rollDis.innerHTML = `roll: ${roll}`;
+    yawDis.innerHTML = `yaw: ${yaw}`;
+
+   })
 </script>
 </html>

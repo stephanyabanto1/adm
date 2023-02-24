@@ -9,16 +9,24 @@ io.on("connection", (socket) => {
 
   socket.on("gyro", (data)=> {
     let coords = Buffer.from(data).toString().split(",")
-    console.log(coords)
-    x = parseInt(x);
-    if(x){
-      y = parseInt(y)
-      io.emit("gyro-output", x, y);
-    }
+    coords[2] = coords[2].split("\r")[0];
+
+    const [pitch, roll, yaw ] = coords;
+    const test = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
+
+    const turret = [
+      (test[0]).toPrecision(5), 
+      (((test[1]+90)/640)+0.02).toPrecision(5),
+      (test[2]).toPrecision(5)
+    ];
+
+    // console.log(coords);
+    // console.log(test);
+    io.emit("gyro-output", turret[0], turret[1], turret[2]);
   })
 
   socket.on("mouse-pos", (pitch, yaw)=> {
-    io.emit("gyro-output", pitch, yaw)
+    io.emit("gyro-output", pitch, 0, yaw);
   })
 });
 
