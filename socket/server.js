@@ -8,7 +8,8 @@ io.on("connection", (socket) => {
   console.log("connection")
 
   socket.on("gyro", (data)=> {
-    let [x, y] = Buffer.from(data).toString().split(",")
+    let coords = Buffer.from(data).toString().split(",")
+    console.log(coords)
     x = parseInt(x);
     if(x){
       y = parseInt(y)
