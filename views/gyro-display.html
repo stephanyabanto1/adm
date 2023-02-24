@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controls</title>
+    <style>
+        html, body {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <canvas style="border-style: solid;"></canvas>
+    <h1 id="angle"></h1>
+    <h1 id="mouse-pos"></h1>
+    <h3>hold click to control</h3>
+</body>
+<script src="http://192.168.0.109:3000/socket.io/socket.io.js"></script>
+<script>
+    // const domain = (new URL(window.location.href));
+    const range = document.getElementById("myRange")
+    
+    const socket = io("http://192.168.0.109:3000");
+    
+    socket.on("connect", () => {
+        // socket.emit("purpose", "mouse-controller")
+        console.log("CONNECTION")
+    })
+</script>
+<script>
+   socket.on("gyro-output", (pitch, roll, yaw))
+</script>
+</html>
