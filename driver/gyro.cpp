@@ -105,7 +105,7 @@ int main(){
 		Total_angle[1] = 0.98 *(Total_angle[1] + Gyro_angle[1]*elapsedTime) + 0.02*Acceleration_angle[1];
 		Total_angle[2] += Gyro_angle[2];
 
-		printf("\r%f,%f,%f", Total_angle[0], Total_angle[1], Total_angle[2]);
+		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], Total_angle[2]);
 		fflush(stdout);
 	}
 	return 0;
