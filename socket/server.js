@@ -6,6 +6,7 @@ const io = new Server(httpServer, { /* options */ });
 
 io.on("connection", (socket) => {
   console.log("connection")
+
   socket.on("gyro", (data)=> {
     let [x, y] = Buffer.from(data).toString().split(",")
     x = parseInt(x);
@@ -14,6 +15,10 @@ io.on("connection", (socket) => {
       io.emit("gyro-output", x, y);
     }
   })
+
+  socket.on("mouse-pos", (data)=> {
+    console.log(data)
+  })
 });
 
-httpServer.listen(3000);
+httpServer.listen(3000, ()=>console.log(httpServer.address()));
