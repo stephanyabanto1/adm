@@ -58,7 +58,7 @@
         const mousePos =  getMousePos(canvas, e)
         const pitch = mousePos.x /180 + 0.06
         const yaw = mousePos.y /180 + 0.06
-        socket.emit("mouse-pos", mousePos)
+        socket.emit("mouse-pos", pitch, yaw)
         traceMouse(mousePos)
         displayCoords({pitch, yaw}, mousePos)
     }
