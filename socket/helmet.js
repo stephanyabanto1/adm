@@ -4,7 +4,8 @@ const { spawn, execSync } = require("child_process");
 const ipAddresses = [
     "http://192.168.2.15:3000",
     "http://192.168.2.14:3000",
-    "http://192.168.0.100:3000"
+    "http://192.168.0.100:3000",
+    "http://192.168.0.109:3000"
 ]
 const sockets = []
 let socket;
