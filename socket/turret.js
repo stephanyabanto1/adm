@@ -43,7 +43,7 @@ function initReciever() {
     socket.on("gyro-output", (pitch, roll, yaw)=>{
         // console.log(`pitch: ${pitch} yaw: ${yaw}`)
         // pin 4 is pitch
-        piblaster.setPwm(4, pitch)
+        piblaster.setPwm(4, roll)
         // piblaster.setPwm(4, 0.08)
         // pin 17 is yaw 
         piblaster.setPwm(17, yaw)
