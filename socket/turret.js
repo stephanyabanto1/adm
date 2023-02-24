@@ -44,9 +44,11 @@ function initReciever() {
         // console.log("pitch:", pitch, ' yaw:',yaw)
         console.log(`pitch: ${pitch} yaw: ${yaw}`)
         // pin 4 is yaw
-        piblaster.setPwm(4, yaw /180 + 0.06)
+        piblaster.setPwm(4, yaw)
+        // piblaster.setPwm(4, 0.08)
         // pin 17 is roll 
-        piblaster.setPwm(17, pitch /180 + 0.06)
+        piblaster.setPwm(17, pitch)
+        // piblaster.setPwm(17, 0.14)
     })
 }
 
