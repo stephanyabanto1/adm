@@ -82,7 +82,7 @@ int main(){
 		Acc_rawZ = read_raw_data(ACCEL_ZOUT_H);
 		
 		/*---X---*/
-		Acceleration_angle[0] = atan((Acc_rawY/16384.0)/sqrt(pow((Acc_rawX/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
+		Acceleration_angle[0] = atan(-1*(Acc_rawY/16384.0)/sqrt(pow((Acc_rawX/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
 		/*---Y---*/
 		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
 		
