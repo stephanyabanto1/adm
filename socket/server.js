@@ -15,7 +15,7 @@ io.on("connection", (socket) => {
     const test = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
 
     const turret = [
-      (test[0]).toPrecision(5), 
+      (((test[0]+90)/640)+0.02).toPrecision(5), 
       (((test[1]+90)/640)+0.02).toPrecision(5),
       (test[2]).toPrecision(5)
     ];
@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("mouse-pos", (pitch, yaw)=> {
-    io.emit("gyro-output", pitch, 0, yaw);
+    io.emit("gyro-output", 0,pitch, yaw);
   })
 });
 
