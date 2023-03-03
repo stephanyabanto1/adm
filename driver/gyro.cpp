@@ -90,13 +90,13 @@ int main(){
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
-		// Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
+		Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
 
 		/*---X---*/
 		Gyro_angle[0] = Gyr_rawX/131.0; 
 		/*---Y---*/
 		Gyro_angle[1] = Gyr_rawY/131.0;
-        // Gyro_angle[2] = Gyr_rawZ/131.0;
+        Gyro_angle[2] = Gyr_rawZ/131.0;
 
 
 		/*---X axis angle---*/
@@ -104,7 +104,7 @@ int main(){
 		/*---Y axis angle---*/
 		Total_angle[1] = 0.98 *(Total_angle[1] + Gyro_angle[1]*elapsedTime) + 0.02*Acceleration_angle[1];
 
-        Total_angle[2] = 0.0;
+        Total_angle[2] = Gyro_angle[2];
 		// Total_angle[2] = 0.98 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + 0.02*Acceleration_angle[2];
 
 		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], Total_angle[2]);
