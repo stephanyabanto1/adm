@@ -86,7 +86,7 @@ int main(){
 		/*---Y---*/
 		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
 		
-		Acceleration_angle[2] = atan(sqrt(Acc_rawX*Acc_rawX + Acc_rawY*Acc_rawY)/Acc_rawZ) *rad_to_deg;
+		Acceleration_angle[2] = atan(sqrt(Acc_rawX/16384.0*Acc_rawX/16384.0 + Acc_rawY/16384.0*Acc_rawY/16384.0)/Acc_rawZ/16384.0) *rad_to_deg;
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
@@ -108,8 +108,9 @@ int main(){
         // Total_angle[2]= Acceleration_angle[2];
         // Total_angle[2] = Acc_rawZ;
         // Total_angle[2] = (Total_angle[2] + Gyro_angle[2]*elapsedTime);
-		// Total_angle[2] = 0.93 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + 0.07*Acceleration_angle[2];
-		Total_angle[2] += Acceleration_angle[2];
+		// Total_angle[2] = 0.93 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + Acc_rawX/16384.0;
+        Total_angle[1] = 0.98 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + 0.02*Acceleration_angle[2];
+		// Total_angle[2] += Acceleration_angle[2];
 
 		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], Total_angle[2]);
 
