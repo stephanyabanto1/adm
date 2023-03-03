@@ -24,6 +24,7 @@ const helmet = (linux, sysname) => {
     }
 }
 
+helmet();
 
 function flushSockets(exception) {
     console.log("FLUSHING SOCKETS")
