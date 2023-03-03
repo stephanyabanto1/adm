@@ -4,11 +4,19 @@ const { Server } = require("socket.io");
 const httpServer = createServer();
 const io = new Server(httpServer, { /* options */ });
 
+let sampler = 0;
+
 io.on("connection", (socket) => {
   console.log("connection")
 
   socket.on("gyro", (data)=> {
     let coords = Buffer.from(data).toString().split(",")
+
+    if(sampler % 100 === 0){
+      console.log(Buffer.from(data).toString())
+      console.log(coords)
+    }
+    sampler ++;
     coords[2] = coords[2].split("\r")[0];
 
     const [pitch, roll, yaw ] = coords;
