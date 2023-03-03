@@ -90,13 +90,13 @@ int main(){
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
-		Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
+		// Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
 
 		/*---X---*/
 		Gyro_angle[0] = Gyr_rawX/131.0; 
 		/*---Y---*/
 		Gyro_angle[1] = Gyr_rawY/131.0;
-        Gyro_angle[2] = Gyr_rawZ/131.0;
+        Gyro_angle[2] = 2.2/131.0;
 
 
 		/*---X axis angle---*/
