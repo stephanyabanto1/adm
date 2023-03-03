@@ -11,17 +11,19 @@ const ipAddresses = [
 const sockets = []
 let socket;
 
-console.log("connecting to server...")
-
-for(let i = 0; i < ipAddresses.length; i++) {
-    sockets[i] = io(ipAddresses[i])
-    sockets[i].on("connect", ()=> {
-        socket = sockets[i];
-        console.log("CONNECTION");
-        flushSockets(i);
-        exec();
-    })
+const helmet = (linux, sysname) => {
+    console.log("connecting to server...")
+    for(let i = 0; i < ipAddresses.length; i++) {
+        sockets[i] = io(ipAddresses[i])
+        sockets[i].on("connect", ()=> {
+            socket = sockets[i];
+            console.log("CONNECTION");
+            flushSockets(i);
+            exec();
+        })
+    }
 }
+
 
 function flushSockets(exception) {
     console.log("FLUSHING SOCKETS")
@@ -65,4 +67,6 @@ const exec = async ()=>{
         // console.log(data);
         socket.emit("gyro", data);
     });
-}
+}   
+
+module.exports = helmet;
