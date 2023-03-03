@@ -90,7 +90,7 @@ int main(){
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
-		// Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
+		Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
 
 		/*---X---*/
 		Gyro_angle[0] = Gyr_rawX/131.0; 
