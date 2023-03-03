@@ -60,9 +60,9 @@ void ms_delay(int val){
 
 int main(){
 	int16_t Acc_rawX, Acc_rawY, Acc_rawZ,Gyr_rawX, Gyr_rawY, Gyr_rawZ;
-	float Acceleration_angle[2];
-	float Gyro_angle[2];
-	float Total_angle[2];
+	float Acceleration_angle[3];
+	float Gyro_angle[3];
+	float Total_angle[3];
 	float elapsedTime, time, timePrev;
 	int i;
 	float rad_to_deg = 180/3.141592654;
@@ -86,17 +86,17 @@ int main(){
 		/*---Y---*/
 		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
 		
-		// Acceleration_angle[2] = atan(Acc_rawZ/sqrt(Acc_rawX*Acc_rawX + Acc_rawZ*Acc_rawZ)) *rad_to_deg;
+		Acceleration_angle[2] = atan(Acc_rawZ/sqrt(Acc_rawX*Acc_rawX + Acc_rawZ*Acc_rawZ)) *rad_to_deg;
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
-		// Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
+		Gyr_rawZ = read_raw_data(GYRO_ZOUT_H);
 
 		/*---X---*/
 		Gyro_angle[0] = Gyr_rawX/131.0; 
 		/*---Y---*/
 		Gyro_angle[1] = Gyr_rawY/131.0;
-        Gyro_angle[2] = 2.2/131.0;
+        Gyro_angle[2] = Gyr_rawZ/131.0;
 
 
 		/*---X axis angle---*/
