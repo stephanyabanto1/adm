@@ -104,9 +104,10 @@ int main(){
 		/*---Y axis angle---*/
 		Total_angle[1] = 0.98 *(Total_angle[1] + Gyro_angle[1]*elapsedTime) + 0.02*Acceleration_angle[1];
 
+        Total_angle[2] = 0.0;
 		// Total_angle[2] = 0.98 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + 0.02*Acceleration_angle[2];
 
-		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], 0.0);
+		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], Total_angle[2]);
 
 		fflush(stdout);
 	}
