@@ -86,7 +86,7 @@ int main(){
 		/*---Y---*/
 		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
 		
-		Acceleration_angle[2] = atan(Acc_rawZ/sqrt(Acc_rawX*Acc_rawX + Acc_rawZ*Acc_rawZ)) *rad_to_deg;
+		Acceleration_angle[2] = atan(Acc_rawZ/sqrt(Acc_rawX*Acc_rawX + Acc_rawY*Acc_rawY)) *rad_to_deg;
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
