@@ -22,6 +22,7 @@ io.on("connection", (socket) => {
 
     // console.log(coords);
     // console.log(test);
+    io.emit("gyro-raw", test[0], test[1],test[2]);
     io.emit("gyro-output", turret[0], turret[1], turret[2]);
   })
 

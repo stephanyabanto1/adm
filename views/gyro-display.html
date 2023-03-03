@@ -15,12 +15,18 @@
     <h1 id="pitch"></h1>
     <h1 id="roll"></h1>
     <h1 id="yaw"></h1>
+<div>
+    <h1 id="pitchr"></h1>
+    <h1 id="rollr"></h1>
+    <h1 id="yawr"></h1>
+</div>
+    
 </body>
-<script src="http://192.168.0.109:3000/socket.io/socket.io.js"></script>
+<script src="http://192.168.2.19:3000/socket.io/socket.io.js"></script>
 <script>
     // const domain = (new URL(window.location.href));
     
-    const socket = io("http://192.168.0.109:3000");
+    const socket = io("http://192.168.2.19:3000");
     
     socket.on("connect", () => {
         // socket.emit("purpose", "mouse-controller")
@@ -31,12 +37,21 @@
     const pitchDis = document.getElementById("pitch")
     const rollDis = document.getElementById("roll")
     const yawDis = document.getElementById("yaw")
+    const pitchRawDis = document.getElementById("pitchr")
+    const rollDisRawDis = document.getElementById("rollr")
+    const yawDisRawDis = document.getElementById("yawr")
 
    socket.on("gyro-output", (pitch, roll, yaw) => {
-    pitchDis.innerHTML = `Pitch: ${pitch}`;
-    rollDis.innerHTML = `roll: ${roll}`;
-    yawDis.innerHTML = `yaw: ${yaw}`;
+    // pitchDis.innerHTML = `Pitch: ${pitch}`;
+    // rollDis.innerHTML = `roll: ${roll}`;
+    // yawDis.innerHTML = `yaw: ${yaw}`;
 
+   })
+
+   socket.on("gyro-raw", (pitch, roll, yaw) => {
+    pitchRawDis.innerHTML = `Pitch: ${pitch}`;
+    rollDisRawDis.innerHTML = `roll: ${roll}`;
+    yawDisRawDis.innerHTML = `yaw: ${yaw}`;
    })
 </script>
 </html>
