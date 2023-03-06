@@ -3,7 +3,7 @@ const { spawn, execSync } = require("child_process");
 const path = require("path");
 
 const driverDir = path.resolve(path.join(__dirname,'driver'))
-
+console.log("DRIVE DIR: ",driverDir)
 const ipAddresses = [
     "http://192.168.2.15:3000",
     "http://192.168.2.14:3000",
