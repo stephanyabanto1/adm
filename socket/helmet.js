@@ -58,7 +58,7 @@ async function exec () {
 
     const child = spawn('./exec', [] ,{
         stdio: ['ignore', 'pipe', process.stderr],
-        cwd: "../driver"
+        cwd: "./driver"
     });
 
     child.stdout.on("data", (data)=>{
