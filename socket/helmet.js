@@ -40,7 +40,7 @@ async function exec () {
     console.log("running build...");
 
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
-        cwd: "../driver"
+        cwd: "./driver"
     }, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
