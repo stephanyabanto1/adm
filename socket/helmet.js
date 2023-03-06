@@ -1,4 +1,4 @@
-const {io} = require("socket.io-client");
+const { io } = require("socket.io-client");
 const { spawn, execSync } = require("child_process");
 
 const ipAddresses = [
@@ -24,8 +24,6 @@ function helmet (linux, sysname) {
     }
 }
 
-// helmet();
-
 function flushSockets(exception) {
     console.log("FLUSHING SOCKETS")
     for(let i = 0; i < ipAddresses.length; i++) {
@@ -40,8 +38,7 @@ async function exec () {
     
     console.log("running build...");
 
-    await execSync('gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm'
-    // await execSync('gcc g.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm'
+    await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm"
     , {
         cwd: "../driver"
     }, (err, stdout, stderr) => {
@@ -69,7 +66,5 @@ async function exec () {
         socket.emit("gyro", data);
     });
 }   
-
-// exec();
 
 module.exports = helmet;
