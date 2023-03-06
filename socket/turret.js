@@ -24,6 +24,7 @@ function exec () {
         sockets[i].on("connect", ()=> {
             socket = sockets[i];
             console.log("CONNECTION");
+            socket.emit("ID", "turret");
             flushSockets(i);
             initReciever();
         })

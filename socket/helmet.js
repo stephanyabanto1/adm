@@ -22,6 +22,7 @@ function helmet (linux, sysname) {
         sockets[i].on("connect", ()=> {
             socket = sockets[i];
             console.log("CONNECTION");
+            socket.enit("ID", "helmet");
             flushSockets(i);
             exec();
         })

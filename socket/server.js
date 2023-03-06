@@ -12,16 +12,13 @@ const PORT = 3000;
 
 function exec () {
   io.on("connection", (socket) => {
-    console.log("connection")
-  
+    socket.on("ID", id => {
+      console.log("CONNECTION: ", id)
+    })
+
     socket.on("gyro", (data)=> {
       let coords = Buffer.from(data).toString().split(",")
   
-      if(sampler % 100 === 0){
-        console.log(Buffer.from(data).toString())
-        console.log(coords)
-      }
-      sampler ++;
       coords[2] = coords[2].split("\r")[0];
   
       const [pitch, roll, yaw ] = coords;
