@@ -15,18 +15,20 @@ const ipAddresses = [
 const sockets = []
 let socket;
 
+function exec () {
+    console.log("connecting to server...")
 
-console.log("connecting to server...")
-
-for(let i = 0; i < ipAddresses.length; i++) {
-    sockets[i] = io(ipAddresses[i])
-    sockets[i].on("connect", ()=> {
-        socket = sockets[i];
-        console.log("CONNECTION");
-        flushSockets(i);
-        initReciever();
-    })
+    for(let i = 0; i < ipAddresses.length; i++) {
+        sockets[i] = io(ipAddresses[i])
+        sockets[i].on("connect", ()=> {
+            socket = sockets[i];
+            console.log("CONNECTION");
+            flushSockets(i);
+            initReciever();
+        })
+    }
 }
+
 
 function flushSockets(exception) {
     console.log("FLUSHING SOCKETS")
@@ -52,10 +54,6 @@ function initReciever() {
     })
 }
 
+// exec();
 
-
-// socket.on("canvas-pos", ( pos )=> {
-//     console.log("pos")
-//     piblaster.setPwm(4, (pos.x * ratio) / 1000 + 0.06)
-//     piblaster.setPwm(17, (pos.y * ratio) / 1000 + 0.06)
-// })
+module.exports = exec;

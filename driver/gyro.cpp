@@ -76,17 +76,17 @@ int main(){
 		timePrev = time;  // the previous time is stored before the actual time read
 		time = ms.count();  // actual time read
 		elapsedTime = (time - timePrev) / 1000;
-		
-		Acc_rawX = read_raw_data(ACCEL_XOUT_H);
-		Acc_rawY = read_raw_data(ACCEL_YOUT_H);
-		Acc_rawZ = read_raw_data(ACCEL_ZOUT_H);
+		///16384.0
+		Acc_rawX = read_raw_data(ACCEL_XOUT_H)/16384.0;
+		Acc_rawY = read_raw_data(ACCEL_YOUT_H)/16384.0;
+		Acc_rawZ = read_raw_data(ACCEL_ZOUT_H)/16384.0;
 		
 		/*---X---*/
-		Acceleration_angle[0] = atan((Acc_rawY/16384.0)/sqrt(pow((Acc_rawX/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
+		Acceleration_angle[0] = atan((Acc_rawY)/sqrt(pow((Acc_rawX),2) + pow((Acc_rawZ),2)))*rad_to_deg;
 		/*---Y---*/
-		Acceleration_angle[1] = atan(-1*(Acc_rawX/16384.0)/sqrt(pow((Acc_rawY/16384.0),2) + pow((Acc_rawZ/16384.0),2)))*rad_to_deg;
+		Acceleration_angle[1] = atan(-1*(Acc_rawX)/sqrt(pow((Acc_rawY),2) + pow((Acc_rawZ),2)))*rad_to_deg;
 		
-		Acceleration_angle[2] = atan(sqrt(Acc_rawX/16384.0*Acc_rawX/16384.0 + Acc_rawY/16384.0*Acc_rawY/16384.0)/Acc_rawZ/16384.0) *rad_to_deg;
+		Acceleration_angle[2] = atan(sqrt(Acc_rawX*Acc_rawX + Acc_rawY*Acc_rawY)/Acc_rawZ) *rad_to_deg;
 	
 		Gyr_rawX = read_raw_data(GYRO_XOUT_H);
 		Gyr_rawY = read_raw_data(GYRO_YOUT_H);
