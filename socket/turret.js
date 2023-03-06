@@ -20,11 +20,14 @@ function exec () {
     console.log("connecting to server...")
 
     for(let i = 0; i < ipAddresses.length; i++) {
+
         sockets[i] = io(ipAddresses[i])
+
         sockets[i].on("connect", ()=> {
+            let address = ipAddresses[i]
             socket = sockets[i];
             console.log("CONNECTION");
-            socket.emit("ID", ipAddresses[i]);
+            socket.emit("ID", address);
             flushSockets(i);
             initReciever();
         })
@@ -55,7 +58,5 @@ function initReciever() {
         // piblaster.setPwm(17, 0.14)
     })
 }
-
-// exec();
 
 module.exports = exec;
