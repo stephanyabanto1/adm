@@ -14,7 +14,7 @@ const ipAddresses = [
 const sockets = []
 let socket;
 
-helmet();
+// helmet();
 function helmet (linux, sysname) {
     console.log("connecting to server...")
     for(let i = 0; i < ipAddresses.length; i++) {
