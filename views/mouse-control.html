@@ -27,7 +27,7 @@
     const socket = io(domain.host);
     
     socket.on("connect", () => {
-        // socket.emit("purpose", "mouse-controller")
+        socket.emit("ID", "mouse-controller")
         console.log("CONNECTION")
     })
 </script>

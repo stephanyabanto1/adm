@@ -35,8 +35,8 @@
     const socket = io(domain.host);
     
     socket.on("connect", () => {
-        // socket.emit("purpose", "mouse-controller")
-        console.log("CONNECTION")
+        socket.emit("ID", "gyro-display");
+        console.log("CONNECTION");
     })
 </script>
 <script>
