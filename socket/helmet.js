@@ -11,7 +11,7 @@ const ipAddresses = [
 const sockets = []
 let socket;
 
-const helmet = (linux, sysname) => {
+function helmet (linux, sysname) {
     console.log("connecting to server...")
     for(let i = 0; i < ipAddresses.length; i++) {
         sockets[i] = io(ipAddresses[i])
@@ -36,7 +36,7 @@ function flushSockets(exception) {
     }
 }
 
-const exec = async ()=>{
+async function exec () {
     
     console.log("running build...");
 
