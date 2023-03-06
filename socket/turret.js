@@ -24,10 +24,9 @@ function exec () {
         sockets[i] = io(ipAddresses[i])
 
         sockets[i].on("connect", ()=> {
-            let address = ipAddresses[i]
             socket = sockets[i];
             console.log("CONNECTION");
-            socket.emit("ID", address);
+            socket.emit("ID", "turret-"+i);
             flushSockets(i);
             initReciever();
         })
