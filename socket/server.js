@@ -19,9 +19,10 @@ function exec () {
     socket.on("gyro", (data)=> {
       let coords = Buffer.from(data).toString().split(",")
   
-      coords[2] = coords[2].split("\r")[0];
+      coords[5] = coords[2].split("\r")[0];
   
-      const [pitch, roll, yaw ] = coords;
+      const [pitch, roll, yaw, x, y,z ] = coords;
+   
       const test = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
   
       const turret = [
@@ -32,6 +33,7 @@ function exec () {
   
       // console.log(coords);
       // console.log(test);
+      io.emit("magnet",coords[3],coords[4],coords[5]);
       io.emit("gyro-raw", test[0], test[1],test[2]);
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
     })
