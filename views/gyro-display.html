@@ -18,6 +18,11 @@
     <h1 id="yaw"></h1>
 </div>
 <div>
+    <h1 id="x"></h1>
+    <h1 id="y"></h1>
+    <h1 id="z"></h1>
+</div>
+<div>
     <h1 id="pitchr"></h1>
     <h1 id="rollr"></h1>
     <h1 id="yawr"></h1>
@@ -47,6 +52,16 @@
     const pitchRawDis = document.getElementById("pitchr");
     const rollDisRawDis = document.getElementById("rollr");
     const yawDisRawDis = document.getElementById("yawr");
+
+    const xd = document.getElementById("x");
+    const yd = document.getElementById("y");
+    const zd = document.getElementById("z");
+
+    socket.on("magnet", (x,y,z)=> {
+        xd.innerHTML = `magnet x: ${x}`;
+        yd.innerHTML = `magnet y: ${y}`;
+        zd.innerHTML = `magnet z: ${z}`;
+    })
 
    socket.on("gyro-output", (pitch, roll, yaw) => {
     // pitchDis.innerHTML = `Pitch: ${pitch}`;
