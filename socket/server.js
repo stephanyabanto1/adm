@@ -17,11 +17,11 @@ function exec () {
     })
 
     socket.on("gyro", (data)=> {
-      let coords = Buffer.from(data).toString().split(",")
+      
+      let filterR = Buffer.from(data).toString().split("\r")[0]
+      let coords = filterR.split(",");
   
-      coords[5] = coords[2].split("\r")[0];
-  
-      const [pitch, roll, yaw, x, y,z ] = coords;
+      const [pitch, roll, yaw, x, y, z ] = coords;
    
       const test = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
   
