@@ -32,6 +32,7 @@ milliseconds ms = duration_cast< milliseconds >(
 #define GYRO_YOUT_H  0x45
 #define GYRO_ZOUT_H  0x47
 
+
 int fd;
 
 void MPU6050_Init(){
@@ -96,21 +97,15 @@ int main(){
 		Gyro_angle[0] = Gyr_rawX/131.0; 
 		/*---Y---*/
 		Gyro_angle[1] = Gyr_rawY/131.0;
-        Gyro_angle[2] = Gyr_rawZ/131.0;
+        	Gyro_angle[2] = Gyr_rawZ/131.0;
 
 
 		/*---X axis angle---*/
 		Total_angle[0] = 0.98 *(Total_angle[0] + Gyro_angle[0]*elapsedTime) + 0.02*Acceleration_angle[0];
 		/*---Y axis angle---*/
 		Total_angle[1] = 0.98 *(Total_angle[1] + Gyro_angle[1]*elapsedTime) + 0.02*Acceleration_angle[1];
-
-        // Total_angle[2] = Gyro_angle[2];
-        // Total_angle[2]= Acceleration_angle[2];
-        // Total_angle[2] = Acc_rawZ;
-        // Total_angle[2] = (Total_angle[2] + Gyro_angle[2]*elapsedTime);
-		// Total_angle[2] = 0.93 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + Acc_rawX/16384.0;
-        Total_angle[1] = 0.98 *(Total_angle[2] + Gyro_angle[2]*elapsedTime) + 0.02*Acceleration_angle[2];
-		// Total_angle[2] += Acceleration_angle[2];
+		
+		Total_angle[2] = Total_angle[2] + Gyro_angle[2]*elapsedTime;
 
 		printf("%f,%f,%f\r", Total_angle[0], Total_angle[1], Total_angle[2]);
 
