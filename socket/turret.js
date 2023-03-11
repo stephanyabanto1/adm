@@ -1,12 +1,6 @@
 let piblaster;
 const { io } = require("socket.io-client");
 
-let turretBoundaries={
-    pitch: {h:0.139,l:0.25},
-    yaw: {h:0.25,l:0.06}
-}
-
-
 if(process.platform === 'linux'){
     console.log("LINUX platform");
     piblaster = require("pi-blaster.js");
@@ -57,14 +51,10 @@ function initReciever() {
     socket.on("gyro-output", (pitch, roll, yaw)=>{
         // console.log(`pitch: ${pitch} yaw: ${yaw}`)
         // pin 4 is pitch
-        if(pitch < turretBoundaries.pitch.h && pitch > turretBoundaries.pitch.l){
-            piblaster.setPwm(4, roll)
-        }
+        
         // piblaster.setPwm(4, 0.08)
         // pin 17 is yaw 
-        if(yaw < turretBoundaries.yaw.h && yaw > turretBoundaries.yaw.l){
-            piblaster.setPwm(17, yaw)
-        }
+        piblaster.setPwm(17, yaw)
         // piblaster.setPwm(17, 0.14)
     })
 
