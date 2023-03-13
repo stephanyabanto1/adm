@@ -10,6 +10,16 @@ let sampler = 0;
 
 const PORT = 3000;
 
+let turretBoundaries={
+  pitch:  {h:0.25, l:0.139},
+  yaw:    {h:0.25,  l:0.06}
+}
+
+let turretPosition = {
+  pitch:  0.2,
+  yaw:    0.2
+}
+
 function exec () {
   io.on("connection", (socket) => {
     socket.on("ID", id => {
@@ -39,8 +49,31 @@ function exec () {
     })
   
     socket.on("mouse-pos", (pitch, yaw)=> {
-      io.emit("gyro-output", 0,pitch, yaw);
+      if( 
+        pitch < turretBoundaries.pitch.h && 
+        pitch > turretBoundaries.pitch.l) {
+        turretPosition.pitch = pitch;
+      }
+      if(yaw < turretBoundaries.yaw.h && 
+        yaw > turretBoundaries.yaw.l ){
+        turretPosition.yaw = yaw;
+      }
+      io.emit("gyro-output", turretPosition.pitch,0, turretPosition.yaw);
     })
+
+    socket.on("manual-control", (pitch, yaw)=> {
+      if( 
+        turretPosition.pitch + pitch < turretBoundaries.pitch.h && 
+        turretPosition.pitch + pitch > turretBoundaries.pitch.l) {
+        turretPosition.pitch += pitch;
+      }
+      if(turretPosition.yaw + yaw < turretBoundaries.pitch.h && 
+        turretPosition.yaw + yaw > turretBoundaries.pitch.l ){
+        turretPosition.yaw += yaw;
+      }
+      io.emit("gyro-output", 0,turretPosition.pitch, turretPosition.yaw);
+    })
+
   });
   
   require("./router")(app);

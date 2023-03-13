@@ -12,13 +12,24 @@
     </style>
 </head>
 <body>
-    <canvas style="border-style: solid;"></canvas>
-    <h1 id="angle"></h1>
-    <h1 id="mouse-pos"></h1>
-    <h3>hold click to control</h3>
+    <div style="display: flex;">
+        <div>
+            <canvas style="border-style: solid;"></canvas>
+            <h1 id="angle"></h1>
+            <h1 id="mouse-pos"></h1>
+            <h3>hold click to control</h3>
+        </div>
+        
+        <div>
+            <h1>Turret position</h1>
+            <h1 id="turret-pos"></h1>
+        </div>
+    </div>
+    
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+    const turretPos = document.getElementById("turret-pos")
     const domain = (new URL(window.location.href));
     const range = document.getElementById("myRange");
 
@@ -30,8 +41,13 @@
         socket.emit("ID", "mouse-controller")
         console.log("CONNECTION")
     })
+
+    socket.on("gyro-output", (pitch, roll, yaw) => {
+        turretPos.innerHTML = `pitch: ${pitch} roll:${roll} yaw: ${yaw}`
+    })
 </script>
 <script>
+    
     const angleDis = document.getElementById("angle")
     const mouseDis = document.getElementById("mouse-pos")
     const canvas = document.querySelector("canvas")

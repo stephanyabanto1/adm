@@ -49,6 +49,7 @@ function initReciever() {
     console.log("INITIALIZING RECIEVER")
     // piblaster 180 degree for servo is 0.06 - 0.24
     socket.on("gyro-output", (pitch, roll, yaw)=>{
+        console.log(pitch, yaw)
         // console.log(`pitch: ${pitch} yaw: ${yaw}`)
         // pin 4 is pitch
         piblaster.setPwm(4, pitch)
