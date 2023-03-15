@@ -107,45 +107,47 @@ void update(){
 	// wire->requestFrom((int)MPU6050_ADDR, 14);
 
     // WRIETE FN????????????????????????
-    
-  rawAccX = read_raw_data(ACCEL_XOUT_H);
-  rawAccY = read_raw_data(ACCEL_YOUT_H);
-  rawAccZ = read_raw_data(ACCEL_ZOUT_H);
-  rawGyroX = read_raw_data(GYRO_XOUT_H);
-  rawGyroY = read_raw_data(GYRO_YOUT_H);
-  rawGyroZ = read_raw_data(GYRO_ZOUT_H);
+    while(1){
+        rawAccX = read_raw_data(ACCEL_XOUT_H);
+        rawAccY = read_raw_data(ACCEL_YOUT_H);
+        rawAccZ = read_raw_data(ACCEL_ZOUT_H);
+        rawGyroX = read_raw_data(GYRO_XOUT_H);
+        rawGyroY = read_raw_data(GYRO_YOUT_H);
+        rawGyroZ = read_raw_data(GYRO_ZOUT_H);
 
-  temp = (rawTemp + 12412.0) / 340.0;
+        temp = (rawTemp + 12412.0) / 340.0;
 
-  accX = ((float)rawAccX) / 16384.0;
-  accY = ((float)rawAccY) / 16384.0;
-  accZ = ((float)rawAccZ) / 16384.0;
+        accX = ((float)rawAccX) / 16384.0;
+        accY = ((float)rawAccY) / 16384.0;
+        accZ = ((float)rawAccZ) / 16384.0;
 
-  angleAccX = atan2(accY, sqrt(accZ * accZ + accX * accX)) * 360 / 2.0 / M_PI;
-  angleAccY = atan2(accX, sqrt(accZ * accZ + accY * accY)) * 360 / -2.0 / M_PI;
+        angleAccX = atan2(accY, sqrt(accZ * accZ + accX * accX)) * 360 / 2.0 / M_PI;
+        angleAccY = atan2(accX, sqrt(accZ * accZ + accY * accY)) * 360 / -2.0 / M_PI;
 
-  gyroX = ((float)rawGyroX) / 65.5;
-  gyroY = ((float)rawGyroY) / 65.5;
-  gyroZ = ((float)rawGyroZ) / 65.5;
+        gyroX = ((float)rawGyroX) / 65.5;
+        gyroY = ((float)rawGyroY) / 65.5;
+        gyroZ = ((float)rawGyroZ) / 65.5;
 
-  gyroX -= gyroXoffset;
-  gyroY -= gyroYoffset;
-  gyroZ -= gyroZoffset;
+        gyroX -= gyroXoffset;
+        gyroY -= gyroYoffset;
+        gyroZ -= gyroZoffset;
 
-  interval = (millis() - preInterval) * 0.001;
+        interval = (millis() - preInterval) * 0.001;
 
-  angleGyroX += gyroX * interval;
-  angleGyroY += gyroY * interval;
-  angleGyroZ += gyroZ * interval;
+        angleGyroX += gyroX * interval;
+        angleGyroY += gyroY * interval;
+        angleGyroZ += gyroZ * interval;
 
-  angleX = (gyroCoef * (angleX + gyroX * interval)) + (accCoef * angleAccX);
-  angleY = (gyroCoef * (angleY + gyroY * interval)) + (accCoef * angleAccY);
-  angleZ = angleGyroZ;
+        angleX = (gyroCoef * (angleX + gyroX * interval)) + (accCoef * angleAccX);
+        angleY = (gyroCoef * (angleY + gyroY * interval)) + (accCoef * angleAccY);
+        angleZ = angleGyroZ;
 
-  preInterval = millis();
+        preInterval = millis();
 
-  printf("%f,%f,%f\r", angleX, angleY, angleZ);
-  fflush(stdout);
+        printf("%f,%f,%f\r", angleX, angleY, angleZ);
+        fflush(stdout);
+    }
+  
 }
 
 void init_MPU () {
