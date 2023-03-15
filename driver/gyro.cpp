@@ -62,9 +62,9 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
     delay(delayBefore);
     if(console){
         
-        printf("========================================");
-        printf("Calculating gyro offsets");
-        printf("DO NOT MOVE MPU6050");
+        printf("%f","========================================");
+        printf("%f","Calculating gyro offsets");
+        printf("%f","DO NOT MOVE MPU6050");
     }
   for(int i = 0; i < 3000; i++){
     if(console && i % 1000 == 0){
@@ -90,12 +90,12 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
   gyroZoffset = z / 3000;
 
   if(console){
-        printf("Done!");
+        printf("%f","Done!");
         // printf("X : ");printf(gyroXoffset);
         // printf("Y : ");fprintf(gyroYoffset);
         // printf("Z : ");printf(gyroZoffset);
-        printf("Program will start after 3 seconds");
-        printf("========================================");
+        printf("%f","Program will start after 3 seconds");
+        printf("%f","========================================");
 		delay(delayAfter);
 	}
 }
@@ -145,7 +145,7 @@ void update(){
         preInterval = millis();
 
         printf("%f,%f,%f\r", angleX, angleY, angleZ);
-        fflush(stdout);
+        // fflush(stdout);
     }
   
 }
