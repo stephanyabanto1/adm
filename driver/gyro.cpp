@@ -31,8 +31,10 @@ int fd;
 
 int16_t rawAccX, rawAccY, rawAccZ, rawTemp,
 rawGyroX, rawGyroY, rawGyroZ;
-
-float gyroXoffset, gyroYoffset, gyroZoffset;
+ 
+float gyroXoffset= 1.45;
+float gyroYoffset= 1.23;
+float gyroZoffset= -1.32;
 
 float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
 
@@ -163,12 +165,13 @@ void init_MPU () {
     angleX = angleAccX;
     angleY = angleAccY;
     preInterval = millis();
-    
+
     update();
 }
 
 int main() {
     fd = wiringPiI2CSetup(Device_Address); 
-    calcOffset(true, 1000, 3000);
+    // calcOffset(true, 1000, 3000);
     init_MPU();
+    return 0;
 }
