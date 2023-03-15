@@ -145,7 +145,7 @@ void update(){
         preInterval = millis();
 
         printf("%f,%f,%f\r", angleX, angleY, angleZ);
-        // fflush(stdout);
+        fflush(stdout);
     }
   
 }
@@ -158,16 +158,17 @@ void init_MPU () {
     wiringPiI2CWriteReg8 (fd, ACCEL_CONFIG,0x00); 
     wiringPiI2CWriteReg8 (fd, PWR_MGMT_1, 0x01);	/* Write to power management register */
     wiringPiI2CWriteReg8 (fd, INT_ENABLE, 0x01);	/*Write to interrupt enable register ???*/
-    update();
     angleGyroX = 0;
     angleGyroY = 0;
     angleX = angleAccX;
     angleY = angleAccY;
     preInterval = millis();
+    
+    update();
 }
 
 int main() {
     fd = wiringPiI2CSetup(Device_Address); 
-    calcOffset(false, 1000, 3000);
+    calcOffset(true, 1000, 3000);
     init_MPU();
 }
