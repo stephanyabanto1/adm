@@ -11,7 +11,7 @@ let sampler = 0;
 const PORT = 3000;
 
 let turretBoundaries={
-  pitch:  {h:0.25, l:0.139},
+  pitch:  {h:0.25, l:0.129},
   yaw:    {h:0.25,  l:0.06}
 }
 
