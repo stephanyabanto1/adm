@@ -159,7 +159,7 @@ void init_MPU () {
 
 int main() {
     fd = wiringPiI2CSetup(Device_Address); 
-    calcOffset(true, 1000, 3000);
+    calcOffset(false, 0, 0);
     init_MPU();
 	
 	while(1){
