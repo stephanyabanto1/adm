@@ -62,7 +62,7 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
 
     delay(delayBefore);
     if(console){
-        std::cout << "Calculating gyro offsets" << endl;
+        std::cout << "Calculating gyro offsets" << std::endl;
     }
   for(int i = 0; i < 3000; i++){
     if(console && i % 1000 == 0){
@@ -88,10 +88,10 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
   gyroZoffset = z / 3000;
 
   if(console){
-	  std::cout << "Calculating gyro offsets" << endl;
-	  std::cout << "X: " << gyroXoffset << endl;
-	  std::cout << "Y: " << gyroXoffset << endl;
-	  std::cout << "Z: " << gyroXoffset << endl;
+	  std::cout << "Calculating gyro offsets" << std::endl;
+	  std::cout << "X: " << gyroXoffset << std::endl;
+	  std::cout << "Y: " << gyroXoffset << std::endl;
+	  std::cout << "Z: " << gyroXoffset << std::endl;
 	delay(delayAfter);
 	}
 }
