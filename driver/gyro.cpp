@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <iostream>
 
-#include <chrono>
 #include <cmath>
 #include <math.h>
 
@@ -63,10 +62,7 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
 
     delay(delayBefore);
     if(console){
-        
-        printf("%f","========================================");
-        printf("%f","Calculating gyro offsets");
-        printf("%f","DO NOT MOVE MPU6050");
+        std::cout << "Calculating gyro offsets" << endl;
     }
   for(int i = 0; i < 3000; i++){
     if(console && i % 1000 == 0){
@@ -92,13 +88,11 @@ void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter) {
   gyroZoffset = z / 3000;
 
   if(console){
-        printf("%f","Done!");
-        // printf("X : ");printf(gyroXoffset);
-        // printf("Y : ");fprintf(gyroYoffset);
-        // printf("Z : ");printf(gyroZoffset);
-        printf("%f","Program will start after 3 seconds");
-        printf("%f","========================================");
-		delay(delayAfter);
+	  std::cout << "Calculating gyro offsets" << endl;
+	  std::cout << "X: " << gyroXoffset << endl;
+	  std::cout << "Y: " << gyroXoffset << endl;
+	  std::cout << "Z: " << gyroXoffset << endl;
+	delay(delayAfter);
 	}
 }
 
@@ -165,7 +159,7 @@ void init_MPU () {
 
 int main() {
     fd = wiringPiI2CSetup(Device_Address); 
-    // calcOffset(true, 1000, 3000);
+    calcOffset(true, 1000, 3000);
     init_MPU();
 	
 	while(1){
