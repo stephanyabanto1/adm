@@ -3,6 +3,7 @@ const { spawn, execSync } = require("child_process");
 const path = require("path");
 
 const driverDir = path.resolve(path.join(__dirname,'../driver'))
+
 console.log("DRIVE DIR: ",driverDir)
 const ipAddresses = [
     "http://192.168.2.15:3000",
@@ -43,7 +44,9 @@ function flushSockets(exception) {
 async function exec () {
     
     console.log("running build...");
-    await execSync ("rm exec", {cwd: driverDir}, (err, stdout, stderr) => {
+    console.log(driverDir)
+
+    await execSync ("rm", ['exec'] ,{cwd: driverDir}, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
             console.log('subprocess stdout: ', Buffer.from(stdout).toString())
@@ -55,7 +58,7 @@ async function exec () {
             // rejects("Subprocess error: ", err)
         }
     })
-    
+
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
         cwd: driverDir
     }, (err, stdout, stderr) => {
