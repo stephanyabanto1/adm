@@ -45,7 +45,7 @@ async function exec () {
     
     
 
-    await execSync ("rm exec", {cwd: driverDir}, (err, stdout, stderr) => {
+    await execSync ("rm exec", (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
             console.log('subprocess stdout: ', Buffer.from(stdout).toString())
