@@ -3,7 +3,7 @@ servo:
 	./exec
 
 gyro:
-	gcc gyro.cpp -lstdc++ -lwiringPi -lwiringPiI2C -lpthread -o exec -lm
+	gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm
 	./exec
 
 test:
