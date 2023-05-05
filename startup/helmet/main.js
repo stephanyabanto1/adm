@@ -43,10 +43,9 @@ function flushSockets(exception) {
 
 async function exec () {
     
-    console.log("running build...");
-    console.log(driverDir)
+    
 
-    await execSync ("rm", ['exec'] ,{cwd: driverDir}, (err, stdout, stderr) => {
+    await execSync ("rm exec", {cwd: driverDir}, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
             console.log('subprocess stdout: ', Buffer.from(stdout).toString())
@@ -58,7 +57,7 @@ async function exec () {
             // rejects("Subprocess error: ", err)
         }
     })
-
+    
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
         cwd: driverDir
     }, (err, stdout, stderr) => {
