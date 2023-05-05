@@ -1,9 +1,9 @@
-let axis = {
+let gAxis = {
     x:0,
     y:0,
     z:0
 }
-let delta = {
+let gDelta = {
     x:0,
     y:0,
     z:0
@@ -11,15 +11,14 @@ let delta = {
 
 socket.on("gyro-raw", (x,y,z) => {
     updateGyroDisplay({x,y,z});
-    
     if(tics === 0) {
-        axis.x = x;
-        axis.y = y;
-        axis.z = z;
+        gAxis.x = x;
+        gAxis.y = y;
+        gAxis.z = z;
     } else {
-        delta.x = axis.x - x;
-        delta.y = axis.y - y;
-        delta.z = axis.z - z
+        gDelta.x = gAxis.x - x;
+        gDelta.y = gAxis.y - y;
+        gDelta.z = gAxis.z - z
     }
     tics++
 })
