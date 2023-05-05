@@ -3,8 +3,8 @@
 #ifndef MPU6050_TOCKN_H
 #define MPU6050_TOCKN_H
 
-#include "Arduino.h"
-#include "Wire.h"
+// #include "Arduino.h"
+// #include "Wire.h"
 
 #define MPU6050_ADDR         0x68
 #define MPU6050_SMPLRT_DIV   0x19
@@ -70,9 +70,9 @@ class MPU6050{
 
   private:
 
-  TwoWire *wire;
+  // TwoWire *wire;
 
-  int16_t rawAccX, rawAccY, rawAccZ, rawTemp,
+  // int16_t rawAccX, rawAccY, rawAccZ, rawTemp,
   rawGyroX, rawGyroY, rawGyroZ;
 
   float gyroXoffset, gyroYoffset, gyroZoffset;
