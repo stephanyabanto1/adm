@@ -9,7 +9,10 @@ module.exports = (app) => {
         res.sendFile(path.resolve(__dirname + '/../views/mouse-control.html'))
     })
 
-    app.get("/gyro", (req, res)=> {
+    app.get("/gyro-ref", (req, res)=> {
+        res.sendFile(path.resolve(__dirname + '/../views/gyro-ref.html'))
+    })
+    app.get("/gyro-display", (req, res)=> {
         res.sendFile(path.resolve(__dirname + '/../views/gyro-display.html'))
     })
 }
