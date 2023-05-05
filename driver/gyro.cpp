@@ -136,9 +136,9 @@ void update(){
 	angleGyroY += gyroY * interval;
 	angleGyroZ += gyroZ * interval;
 
-	sX = (0.5 * accX * (interval*interval));
-	sY = (0.5 * accY * (interval*interval));
-	sZ = (0.5 * accZ * (interval*interval));
+	sX = (sX*interval) + (0.5 * accX * (interval*interval));
+	sY = (sY*interval) + (0.5 * accY * (interval*interval));
+	sZ = (sZ*interval) + (0.5 * accZ * (interval*interval));
 
 	angleX = (gyroCoef * (angleX + gyroX * interval)) + (accCoef * angleAccX);
 	angleY = (gyroCoef * (angleY + gyroY * interval)) + (accCoef * angleAccY);
