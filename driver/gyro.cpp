@@ -36,7 +36,7 @@ float gyroXoffset= 1.45;
 float gyroYoffset= 1.23;
 float gyroZoffset= -1.32;
 
-float sX,sY,sZ;
+float sX,sY,sZ, vX, vY, vZ,dvX, dvY, dvZ;
 
 float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
 
@@ -135,6 +135,12 @@ void update(){
 	angleGyroX += gyroX * interval;
 	angleGyroY += gyroY * interval;
 	angleGyroZ += gyroZ * interval;
+
+
+	vX = vX + accX*interval;
+	vX = vX + accX*interval;
+	vX = vX + accX*interval;
+
 
 	sX = (sX*interval) + (0.5 * accX * (interval*interval));
 	sY = (sY*interval) + (0.5 * accY * (interval*interval));
