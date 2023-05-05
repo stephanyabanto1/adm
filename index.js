@@ -10,7 +10,7 @@ if(linux) {
     if(system) {
         console.log("initiating system: "+ system + ' on raspberrypi', '\x1b[32m%s\x1b[0m')
 
-        require(`./socket/${system}`)(true, sysname)
+        require(`./startup/${system}/main`)(true, sysname)
     } else {
         console.error(new Error("hostname does not fit any subsystem description, cannot initiate..."))
     }
@@ -19,7 +19,7 @@ if(linux) {
     
     if(system) {
         console.log("initiating system: "+ system.toUpperCase() + ' on mock mode', '\x1b[32m%s\x1b[0m')
-        require(`./socket/${system}`)(false, system)
+        require(`./startup/${system}/main`)(false, system)
     } else {
         console.error(new Error("process.env.sys requires a system name to start..."))
     }

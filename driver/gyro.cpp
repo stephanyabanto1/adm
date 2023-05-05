@@ -1,12 +1,11 @@
-#include <wiringPiI2C.h>
-#include <wiringPi.h>
+#include "includes/wiringPiI2C.h"
+#include "includes/wiringPi.h"
 
 #define _USE_MATH_DEFINES
  
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-
 #include <cmath>
 #include <math.h>
 
@@ -34,6 +33,8 @@ rawGyroX, rawGyroY, rawGyroZ;
 float gyroXoffset= 1.45;
 float gyroYoffset= 1.23;
 float gyroZoffset= -1.32;
+
+float sX,sY,sZ;
 
 float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
 
@@ -133,6 +134,10 @@ void update(){
 	angleGyroY += gyroY * interval;
 	angleGyroZ += gyroZ * interval;
 
+	sX = (0.5 * accX * (interval*interval));
+	sY = (0.5 * accY * (interval*interval));
+	sZ = (0.5 * accZ * (interval*interval));
+
 	angleX = (gyroCoef * (angleX + gyroX * interval)) + (accCoef * angleAccX);
 	angleY = (gyroCoef * (angleY + gyroY * interval)) + (accCoef * angleAccY);
 	angleZ = angleGyroZ;
@@ -164,7 +169,7 @@ int main() {
 	
 	while(1){
 		update();
-		printf("%f,%f,%f\r", angleX, angleY, angleZ);
+		printf("%f,%f,%f,%f,%f,%f\r", angleX, angleY, angleZ,sX, sY, sZ);
 		fflush(stdout);
 	}
 	

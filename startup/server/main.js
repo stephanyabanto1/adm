@@ -76,10 +76,10 @@ function exec () {
 
   });
   
-  require("./router")(app);
+  require("./routes/router")(app);
 
   httpServer.listen(PORT, ()=>{
-    const ip = require("./helper").getHostIp();
+    const ip = require("../helper").getHostIp();
     console.log(`http://${ip}:${PORT}`)
   });
 }

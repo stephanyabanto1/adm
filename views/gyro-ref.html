@@ -9,6 +9,7 @@
         html, body {
             box-sizing: border-box;
         }
+        /* DELETE THIS HTML THIS SHOULD BE ON GYRO DISPLAY */
     </style>
 </head>
 <body>
@@ -40,7 +41,7 @@
     const socket = io(domain.host);
     
     socket.on("connect", () => {
-        socket.emit("ID", "gyro-display");
+        socket.emit("ID", "gyro-ref");
         console.log("CONNECTION");
     })
 </script>
