@@ -62,7 +62,7 @@ async function exec () {
     }
 
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
-        cwd: driverDir
+        // cwd: driverDir
     }, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
