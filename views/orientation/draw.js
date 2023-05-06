@@ -1,5 +1,3 @@
-const { text } = require("express");
-
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
     textSize(width / 3);

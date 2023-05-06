@@ -15,8 +15,8 @@
         }
 
         .hud{
-          margin: 1vh 1vw;
-          padding: 10px 15px;
+          margin: 5px 5px;
+          /* padding: 10px 15px; */
           position: fixed;
           background-color: grey;
           /* display: flex; */
@@ -24,15 +24,21 @@
 
         .hud > div {
           display: flex;
+          border-style: solid;
         }
 
         .hud > div> p {
-          width: 6vw;
+          width: 60px;
+        }
+
+        .hud > div> div {
+          width: 120px;
         }
     </style>
   </head>
 <body>
   <div class="hud">
+    <h3>Raw Gyro Values</h3>
     <div id="gyro">
       <p>GYRO:</p>
       <div>
@@ -59,10 +65,10 @@
     </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="orientation/connection"></script>
   <script src="orientation/accel"></script>
   <script src="orientation/gyro"></script>
   <script src="orientation/mag"></script>
+  <script src="orientation/connection"></script>
   <script src="orientation/draw"></script>
 </body>
 </html>

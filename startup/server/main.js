@@ -29,14 +29,15 @@ function exec () {
     socket.on("orientation", (data)=> {
       
       let filterR = Buffer.from(data).toString().split("\r")[0]
-      let coords = filterR.split(",");
+      let stringVal = filterR.split(",");
       
+      const rawValues = [];
+      stringVal.forEach(val => {
+        rawValues.push(parseFloat(val))
+      })
+
       io.emit("raw-values", {x: rawValues[0], y: rawValues[1],z: rawValues[2]},{x: rawValues[3], y: rawValues[4],z: rawValues[5]},{x: rawValues[6], y: rawValues[7],z: rawValues[8]});
       
-      const [pitch, roll, yaw, x, y, z ] = coords;
-      
-      const rawValues = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
-  
       const turret = [
         (((rawValues[0]+90)/640)+0.02).toPrecision(5), 
         (((rawValues[1]+90)/640)+0.02).toPrecision(5),
@@ -45,7 +46,7 @@ function exec () {
   
       // console.log(coords);
       // console.log(test);
-      io.emit("magnet",coords[3],coords[4],coords[5]);
+      io.emit("magnet",stringVal[3],stringVal[4],stringVal[5]);
 
 
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
