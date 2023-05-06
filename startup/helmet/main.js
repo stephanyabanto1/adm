@@ -2,7 +2,7 @@ const { io } = require("socket.io-client");
 const { spawn, execSync } = require("child_process");
 const path = require("path");
 
-const driverDir = path.resolve(path.join(__dirname,'../driver'))
+const driverDir = path.resolve(path.join(__dirname,'../../driver'))
 
 console.log("DRIVE DIR: ",driverDir)
 const ipAddresses = [
@@ -44,25 +44,21 @@ function flushSockets(exception) {
 async function exec () {
     
     
-    try {
-        await execSync ("rm exec", (err, stdout, stderr) => {
-            if(!err) {
-                // change this, something better
-                console.log('subprocess stdout: ', Buffer.from(stdout).toString())
-                console.log('subprocess stderr: ', Buffer.from(stderr).toString())
-                // resolve()
-                
-            } else {
-                console.error("BUILD ERROR: ",err)
-                // rejects("Subprocess error: ", err)
-            }
-        })
-    } catch (err){
-        console.log(err)
-    }
+    await execSync ("rm exec",{cwd: driverDir}, (err, stdout, stderr) => {
+        if(!err) {
+            // change this, something better
+            console.log('subprocess stdout: ', Buffer.from(stdout).toString())
+            console.log('subprocess stderr: ', Buffer.from(stderr).toString())
+            // resolve()
+            
+        } else {
+            console.error("BUILD ERROR: ",err)
+            // rejects("Subprocess error: ", err)
+        }
+    })
 
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
-        // cwd: driverDir
+        cwd: driverDir
     }, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
