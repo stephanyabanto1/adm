@@ -37,6 +37,7 @@ float gyroYoffset= 1.23;
 float gyroZoffset= -1.32;
 
 float sX,sY,sZ, vX, vY, vZ,dvX, dvY, dvZ;
+float magX,magY,magZ;
 
 float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
 
@@ -177,7 +178,7 @@ int main() {
 	
 	while(1){
 		update();
-		printf("%f,%f,%f,%f,%f,%f\r", angleX, angleY, angleZ,sX, sY, sZ);
+		printf("%f,%f,%f,%f,%f,%f,%f,%f,%f\r", angleX, angleY, angleZ,sX, sY, sZ,magX,magY,magZ);
 		fflush(stdout);
 	}
 	

@@ -26,25 +26,28 @@ function exec () {
       console.log("CONNECTION: ", id)
     })
 
-    socket.on("gyro", (data)=> {
+    socket.on("orientation", (data)=> {
       
       let filterR = Buffer.from(data).toString().split("\r")[0]
       let coords = filterR.split(",");
-  
+      
+      io.emit("raw-values", {x: rawValues[0], y: rawValues[1],z: rawValues[2]},{x: rawValues[3], y: rawValues[4],z: rawValues[5]},{x: rawValues[6], y: rawValues[7],z: rawValues[8]});
+      
       const [pitch, roll, yaw, x, y, z ] = coords;
-   
-      const test = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
+      
+      const rawValues = [parseFloat(pitch), parseFloat(roll), parseFloat(yaw)];
   
       const turret = [
-        (((test[0]+90)/640)+0.02).toPrecision(5), 
-        (((test[1]+90)/640)+0.02).toPrecision(5),
-        (test[2]).toPrecision(5)
+        (((rawValues[0]+90)/640)+0.02).toPrecision(5), 
+        (((rawValues[1]+90)/640)+0.02).toPrecision(5),
+        (rawValues[2]).toPrecision(5)
       ];
   
       // console.log(coords);
       // console.log(test);
       io.emit("magnet",coords[3],coords[4],coords[5]);
-      io.emit("gyro-raw", test[0], test[1],test[2]);
+
+
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
     })
   

@@ -9,7 +9,7 @@ let gDelta = {
     z:0
 }
 
-socket.on("gyro-raw", (x,y,z) => {
+socket.on("raw-values", (x,y,z) => {
     updateGyroDisplay({x,y,z});
     if(tics === 0) {
         gAxis.x = x;

@@ -43,7 +43,7 @@ function flushSockets(exception) {
 
 async function exec () {
     
-    
+    console.log("CLEANUP")
     await execSync ("rm exec",{cwd: driverDir}, (err, stdout, stderr) => {
         if(!err) {
             // change this, something better
@@ -56,6 +56,8 @@ async function exec () {
             // rejects("Subprocess error: ", err)
         }
     })
+    
+    console.log("COMPILING")
 
     await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
         cwd: driverDir
@@ -80,8 +82,7 @@ async function exec () {
     });
 
     child.stdout.on("data", (data)=>{
-        // console.log(data);
-        socket.emit("gyro", data);
+        socket.emit("orientation", data);
     });
 }   
 
