@@ -47,18 +47,19 @@ function flushSockets(exception) {
 async function exec () {
     
     console.log("CLEANUP")
-    await execSync ("rm exec",{cwd: driverDir}, (err, stdout, stderr) => {
-        if(!err) {
-            // change this, something better
-            console.log('subprocess stdout: ', Buffer.from(stdout).toString())
-            console.log('subprocess stderr: ', Buffer.from(stderr).toString())
-            // resolve()
+    // DON'T CRASH ON ERROR IDK --> if no exec it crashes
+    // await execSync ("rm exec",{cwd: driverDir}, (err, stdout, stderr) => {
+    //     if(!err) {
+    //         // change this, something better
+    //         console.log('subprocess stdout: ', Buffer.from(stdout).toString())
+    //         console.log('subprocess stderr: ', Buffer.from(stderr).toString())
+    //         // resolve()
             
-        } else {
-            console.error("BUILD ERROR: ",err)
-            // rejects("Subprocess error: ", err)
-        }
-    })
+    //     } else {
+    //         console.error("BUILD ERROR: ",err)
+    //         // rejects("Subprocess error: ", err)
+    //     }
+    // })
     
     console.log("COMPILING")
 
