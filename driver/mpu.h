@@ -16,6 +16,7 @@
 #define GYRO_XOUT_H  0x43
 #define GYRO_YOUT_H  0x45
 #define GYRO_ZOUT_H  0x47
+#define TEMP_OUT_H   0x40
 
 class MPU6050 {
     public:
@@ -24,15 +25,15 @@ class MPU6050 {
         void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter);
         void update();
         void init_MPU();
+        void getTemp(float temp);
         void getGyro(float (&gyroArray)[2]);
-        void getAcc();
-        void getMag();
+        void getAcc(float (&accArray)[2]);
+        void getMag(float (&magArray)[2]);
         
     private:
         int fd;
         
-        int16_t rawAccX, rawAccY, rawAccZ, rawTemp,
-        rawGyroX, rawGyroY, rawGyroZ;
+        int16_t rawAccX, rawAccY, rawAccZ, rawTemp, rawGyroX, rawGyroY, rawGyroZ;
         
         float gyroXoffset= 1.45;
         float gyroYoffset= 1.23;

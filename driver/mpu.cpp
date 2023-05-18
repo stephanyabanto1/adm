@@ -59,6 +59,7 @@ void MPU6050::update(){
 	rawGyroX = read_raw_data(GYRO_XOUT_H);
 	rawGyroY = read_raw_data(GYRO_YOUT_H);
 	rawGyroZ = read_raw_data(GYRO_ZOUT_H);
+  rawTemp = read_raw_data(TEMP_OUT_H);
 
 	temp = (rawTemp + 12412.0) / 340.0;
 
@@ -118,7 +119,12 @@ void MPU6050::init_MPU () {
 }
 
 void MPU6050::getGyro(float (&gyroArray)[2]){
+
   gyroArray[0] = angleX;
   gyroArray[1] = angleY;
   gyroArray[2] = angleZ;
+}
+
+void MPU6050::getTemp(float tempOut) {
+  tempOut = temp; 
 }

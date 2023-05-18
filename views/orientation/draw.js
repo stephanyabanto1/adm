@@ -16,20 +16,4 @@ function draw() {
     rotateX(gDelta.x)
     box( 180, 30, 180)
     pop()
-
-    translate(400, 0,0);
-    push()
-    rotateX(gDelta.y)
-    rotateY(gDelta.z)
-    rotateX(gDelta.x)
-    box( 180, 30, 180)
-    pop()
-
-    translate(-200,200,0);
-    push()
-    rotateX(gDelta.y)
-    rotateY(gDelta.z)
-    rotateX(gDelta.x)
-    box( 180, 30, 180)
-    pop()
 }
