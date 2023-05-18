@@ -19,9 +19,14 @@
 
 class MPU6050 {
     public:
-        MPU6050 (int fd);
+        MPU6050 ();
         short read_raw_data(int addr);
         void calcOffset(bool console, uint16_t delayBefore, uint16_t delayAfter);
+        void update();
+        void init_MPU();
+        void getGyro(float (&gyroArray)[2]);
+        void getAcc();
+        void getMag();
         
     private:
         int fd;
@@ -34,7 +39,6 @@ class MPU6050 {
         float gyroZoffset= -1.32;
 
         float sX,sY,sZ, vX, vY, vZ,dvX, dvY, dvZ;
-        float magX,magY,magZ;
 
         float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
 
@@ -42,6 +46,8 @@ class MPU6050 {
         angleAccX, angleAccY, angleAccZ;
 
         float angleX, angleY, angleZ;
+        float accX, accY, accZ;
+        float magX,magY,magZ;
 
         float interval;
         long preInterval;
