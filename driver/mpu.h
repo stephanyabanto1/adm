@@ -46,7 +46,7 @@ class MPU6050 {
         angleAccX, angleAccY, angleAccZ;
 
         float angleX, angleY, angleZ;
-        float accX, accY, accZ;
+        // float accX, accY, accZ;
         float magX,magY,magZ;
 
         float interval;
