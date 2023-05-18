@@ -1,9 +1,9 @@
 main:
-	gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -lpthread  -o exec 
+	gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -lpthread  -o exec -lm 
 	./exec
 
 servo:
-	gcc servo.cpp -lstdc++ -lwiringPi -lpthread -o exec 
+	gcc servo.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm
 	./exec
 
 gyro:
@@ -11,7 +11,7 @@ gyro:
 	./exec
 
 test:
-	gcc test.cpp -lstdc++ -o test
+	gcc test.cpp -lstdc++ -o test -lm
 	./test
 	rm test
 

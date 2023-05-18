@@ -6,8 +6,6 @@
 #include <cmath>
 #include <math.h>
 
-
-
 MPU6050::MPU6050 (){
 	//check if fd is successfull connect
   fd = wiringPiI2CSetup(Device_Address); 
