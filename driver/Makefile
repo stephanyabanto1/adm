@@ -1,5 +1,5 @@
 main:
-	gcc main.cpp -lstdc++ -lwiringPi -lpthread -o exec 
+	gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -lpthread  -o exec 
 	./exec
 
 servo:
