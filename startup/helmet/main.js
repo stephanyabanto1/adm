@@ -61,7 +61,7 @@ async function exec () {
     
     console.log("COMPILING")
 
-    await execSync("gcc gyro.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
+    await execSync("gcc main.cpp -lstdc++ -lwiringPi -lpthread -o exec -lm", {
         cwd: driverDir
     }, (err, stdout, stderr) => {
         if(!err) {
