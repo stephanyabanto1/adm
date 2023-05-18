@@ -119,6 +119,6 @@ void MPU6050::init_MPU () {
 
 void MPU6050::getGyro(float (&gyroArray)[2]){
   gyroArray[0] = angleX;
-  gyroArray[1] = angleX;
-  gyroArray[2] = angleX;
+  gyroArray[1] = angleY;
+  gyroArray[2] = angleZ;
 }
