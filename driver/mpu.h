@@ -16,7 +16,7 @@
 #define GYRO_XOUT_H  0x43
 #define GYRO_YOUT_H  0x45
 #define GYRO_ZOUT_H  0x47
-#define TEMP_OUT_H   0x40
+#define TEMP_OUT_H   0x4A
 
 class MPU6050 {
     public:
