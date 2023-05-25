@@ -1,7 +1,11 @@
 #include "mpu.h"
 
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
+// #include <wiringPi.h>
+// #include <wiringPiI2C.h>
+#include "includes/wiringPi.h"
+#include "includes/wiringPiI2C.h"
+
+
 
 #include <cmath>
 #include <math.h>

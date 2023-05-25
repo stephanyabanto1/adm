@@ -2,6 +2,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
     textSize(width / 3);
     textAlign(CENTER, CENTER);
+    rectMode(CENTER);
 }
 
 function draw() {
