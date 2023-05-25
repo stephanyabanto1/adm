@@ -1,6 +1,6 @@
 main:
-	# gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -lpthread  -o exec -lm 
-	gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -o exec
+	gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -lpthread  -o exec -lm 
+	# gcc main.cpp mpu.cpp -lstdc++ -lwiringPi -o exec
 	./exec
 
 servo:
