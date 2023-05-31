@@ -52,7 +52,9 @@ function exec () {
 
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
     })
-  
+    socket.on("test-order", value =>{
+      socket.emit("test-order", value)
+    })
     socket.on("mouse-pos", (pitch, yaw)=> {
       // if( 
       //   pitch < turretBoundaries.pitch.h && 

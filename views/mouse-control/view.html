@@ -23,12 +23,14 @@
         <div>
             <h1>Turret position</h1>
             <h1 id="turret-pos"></h1>
+            <button id="test-button">test button</button>
         </div>
     </div>
     
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+    const testButton =document.getElementById("test-button")
     const turretPos = document.getElementById("turret-pos")
     const domain = (new URL(window.location.href));
     const range = document.getElementById("myRange");
@@ -56,6 +58,10 @@
     canvas.height = 600
     let control = false
     
+    testButton.addEventListener("click", ()=> {
+        socket.emit("test-order", 5)
+    })
+
     canvas.addEventListener("click", () => control = !control)
 
     animate()
