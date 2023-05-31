@@ -77,9 +77,9 @@
 
         let pitch = mousePos.y
         let yaw = mousePos.x
-        
-        pitch = pitch.toPrecision(5);
-        yaw = yaw.toPrecision(5);
+
+        // pitch = pitch.toPrecision(5);
+        // yaw = yaw.toPrecision(5);
         socket.emit("mouse-pos", pitch, yaw)
         traceMouse(mousePos)
         displayCoords({pitch, yaw}, mousePos)

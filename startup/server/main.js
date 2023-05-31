@@ -66,6 +66,7 @@ function exec () {
       io.emit("mouse-order", turretPosition.pitch
       // ,0, turretPosition.yaw
       );
+      console.log(turretPosition)
     })
 
     socket.on("manual-control", (pitch, yaw)=> {
