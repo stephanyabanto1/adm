@@ -13,8 +13,8 @@ function draw() {
 
     push()
     rotateX(gDelta.y)
-    rotateY(gDelta.z)
-    rotateX(gDelta.x)
+    rotateY(gDelta.x)
+    rotateX(gDelta.z)
     box( 180, 30, 180)
     pop()
 }
