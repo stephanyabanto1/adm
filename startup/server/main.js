@@ -22,7 +22,6 @@ let turretPosition = {
 
 function exec () {
   io.on("connection", (socket) => {
-    console.log("connection")
     socket.on("ID", id => {
       console.log("CONNECTION: ", id)
     })
@@ -52,8 +51,10 @@ function exec () {
 
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
     })
+
     socket.on("test-order", value =>{
-      socket.emit("test-order", value)
+      console.log(value)
+      socket.emit("order", value)
     })
     socket.on("mouse-pos", (pitch, yaw)=> {
       // if( 
@@ -65,10 +66,9 @@ function exec () {
       //   yaw > turretBoundaries.yaw.l ){
         turretPosition.yaw = yaw;
       // }
-      io.emit("mouse-order", turretPosition.pitch
+      io.emit("mouse-order", turretPosition.pitch, turretPosition.yaw
       // ,0, turretPosition.yaw
       );
-      console.log(turretPosition)
     })
 
     socket.on("manual-control", (pitch, yaw)=> {
