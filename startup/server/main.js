@@ -52,6 +52,10 @@ function exec () {
       io.emit("gyro-output", turret[0], turret[1], turret[2]);
     })
   
+    socket.on('mpu9265',ax,ay,az, wx,wy,wz, mx,my,mz => {
+      console.log(ax,ay,az, wx,wy,wz, mx,my,mz)
+    })
+
     socket.on("mouse-pos", (pitch, yaw)=> {
       if( 
         pitch < turretBoundaries.pitch.h && 
