@@ -27,3 +27,4 @@ orientation.get('/accel', (req, res) => res.sendFile(path.resolve(orientationRou
 orientation.get('/draw', (req, res) => res.sendFile(path.resolve(orientationRoute + '/draw.js')))
 orientation.get('/gyro', (req, res) => res.sendFile(path.resolve(orientationRoute + '/gyro.js')))
 orientation.get('/mag', (req, res) => res.sendFile(path.resolve(orientationRoute + '/mag.js')))
+orientation.get('/heading', (req, res) => res.sendFile(path.resolve(orientationRoute + '/heading.js')))

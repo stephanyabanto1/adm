@@ -27,8 +27,20 @@ function exec () {
     })
 
     socket.on("py-mpu", (data) => {
-      // console.log("THIS")
-      socket.emit('py-data', data)
+      // console.log(data)
+      // io.emit('py-data', data)
+      let [gx, gy, gz, ax, ay,az,mx,my,mz, h] = data.split(',')
+      const gyro =    {x: parseFloat(gx), y:parseFloat(gy), z: parseFloat(gz)}
+      const accel =   {x: parseFloat(ax), y:parseFloat(ay), z: parseFloat(az)}
+      const mag =     {x: parseFloat(mz), y:parseFloat(my), z: parseFloat(mx)}
+      h=parseFloat(h);
+
+      //AX12 CONV RATE 0 / 1023
+
+      //H -180 / 180
+      h = Math.trunc(((h+180)/360) * 1023)
+      
+      io.emit('h-order', h)
     })
 
     socket.on("orientation", (data)=> {

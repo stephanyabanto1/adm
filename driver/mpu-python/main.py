@@ -17,8 +17,6 @@ def connect():
     # print('recording data')
     initLoop()
 
-# aX,aY,aZ,wX,wY,wZ,mX,mY,mZ,h = 0,0,0,0,0,0,0,0,0,0
-
 
 def initLoop ():
 
@@ -45,21 +43,6 @@ def initLoop ():
                  +','+wX+','+wY+','+wZ
                  +','+mX+','+mY+','+mZ+','+h)
 
-
-
-        # sio.emit('acc',wx,wy,wz)
-        # sio.emit('mag',mx,my,mz)
-        # sio.emit('heading',heading)
-        # print('{}'.format('-'*30))
-        # print('accel [g]: x = {0:2.2f}, y = {1:2.2f}, z =  {2:2.2f} '.format(ax,ay,az))
-        # print('gyro [dps]:  x = {0:2.2f}, y = {1:2.2f}, z = {2:2.2f}'.format(wx,wy,wz))
-        # print('mag [uT]:   x = {0:2.2f}, y = {1:2.2f}, z = {2:2.2f}'.format(mx,my,mz))
-        # print('heading:   x = {0:2.2f}'.format(heading))
-        # print('{}'.format('-'*30))
-    
-        # time.sleep(1)
-
-# initLoop ()
         
 sio.connect('http://192.168.2.12:3000')
 sio.wait()

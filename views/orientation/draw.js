@@ -12,9 +12,9 @@ function draw() {
     angleMode(DEGREES)
 
     push()
-    rotateX(gDelta.y)
-    rotateY(gDelta.z)
-    rotateX(gDelta.x)
+    rotateY(hDelta.h)
+    // rotateX(gDelta.x)
+    // rotateZ(gDelta.z)
     box( 180, 30, 180)
     pop()
 }
