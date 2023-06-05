@@ -39,7 +39,7 @@ def initLoop ():
         mY = str(my)
         mZ = str(mz)
         h = str(heading)
-        
+
         sio.emit('gyro',' '+aX+','+aY+','+aZ
                  +','+wX+','+wY+','+wZ
                  +','+mX+','+mY+','+mZ+','+h)
@@ -60,5 +60,5 @@ def initLoop ():
 
 # initLoop ()
         
-sio.connect('http://192.168.2.19:3000')
+sio.connect('http://192.168.2.12:3000')
 sio.wait()
