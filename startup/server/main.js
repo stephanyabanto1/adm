@@ -26,6 +26,10 @@ function exec () {
       console.log("CONNECTION: ", id)
     })
 
+    socket.on("py-mpu", (data) => {
+      socket.emit('py-data', data)
+    })
+
     socket.on("orientation", (data)=> {
       
       let filterR = Buffer.from(data).toString().split("\r")[0]

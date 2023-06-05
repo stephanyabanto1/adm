@@ -40,7 +40,7 @@ def initLoop ():
         mZ = str(mz)
         h = str(heading)
 
-        sio.emit('gyro',' '+aX+','+aY+','+aZ
+        sio.emit('py-mpu',' '+aX+','+aY+','+aZ
                  +','+wX+','+wY+','+wZ
                  +','+mX+','+mY+','+mZ+','+h)
 
