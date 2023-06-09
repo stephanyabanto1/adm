@@ -6,8 +6,6 @@ sio = socketio.Client()
 def disconnect():
     print('disconnected from server')
 
-
-
 time.sleep(1) # delay necessary to allow mpu9250 to settle
 
 @sio.event
