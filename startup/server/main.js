@@ -26,6 +26,11 @@ function exec () {
       console.log("CONNECTION: ", id)
     })
 
+    socket.on("drive-control", data=>{
+      socket.emit("drive-orders", data)
+    })
+
+
     socket.on("orientation", (data)=> {
       
       let filterR = Buffer.from(data).toString().split("\r")[0]
