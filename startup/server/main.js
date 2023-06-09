@@ -27,7 +27,7 @@ function exec () {
     })
 
     socket.on("drive-control", data=>{
-      socket.emit("drive-orders", data)
+      io.emit("drive-orders", data.angle, data.speed)
     })
 
 
