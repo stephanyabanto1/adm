@@ -23,6 +23,7 @@ let socket;
 function helmet (linux, sysname) {
     console.log("connecting to server...")
     for(let i = 0; i < ipAddresses.length; i++) {
+        console.log(ipAddresses[i])
         sockets[i] = io(ipAddresses[i])
         sockets[i].on("connect", ()=> {
             socket = sockets[i];
