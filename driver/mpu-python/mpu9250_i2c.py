@@ -2,12 +2,9 @@
 # it will be used as the I2C controller and function harbor for the project 
 # refer to datasheet and register map for full explanation
 
-import  smbus2 
-import  time
+import smbus2 
+import time
 import math
-
-
-
 
 def MPU6050_start():
     # alter sample rate (stability)
@@ -52,8 +49,6 @@ def read_raw_bits(register):
     if(value > 32768):
         value -= 65536
     return value
-
-
 
 def mpu6050_conv():
     
