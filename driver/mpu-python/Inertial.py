@@ -96,8 +96,8 @@ class Magnetometer():
 
 class InertialSensor():
 	def __init__(self) -> None:
-		self.run_MPU_config()
-		self.run_AK_config()
+		self.config_MPU()
+		self.config_AK()
 		self.gyro = Gyroscope()
 		self.accel = Accelerometer()
 		self.mag = Magnetometer()
@@ -108,7 +108,7 @@ class InertialSensor():
 		mag = self.mag.read()
 		return gyro, accel, mag
 
-	def run_MPU_config(self):
+	def config_MPU(self):
 		samp_rate_div = 0 # sample rate = 8 kHz/(1+samp_rate_div)
 		bus.write_byte_data(MPU6050_ADDR, SMPLRT_DIV, samp_rate_div)
 		time.sleep(0.1)
@@ -137,7 +137,7 @@ class InertialSensor():
 		bus.write_byte_data(MPU6050_ADDR, INT_ENABLE, 1)
 		time.sleep(0.1)
 	
-	def run_AK_config(self):
+	def config_AK(self):
 		bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,0x00)
 		time.sleep(0.1)
 		AK8963_bit_res = 0b0001 # 0b0001 = 16-bit
