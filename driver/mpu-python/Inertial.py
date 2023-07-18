@@ -55,7 +55,7 @@ class InertialSensor():
 		self.gyro = Gyroscope()
 
 	def read_data(self):
-		print(self.gyro.read())
+		return self.gyro.read()
 
 	def run_config(self):
 		samp_rate_div = 0 # sample rate = 8 kHz/(1+samp_rate_div)
