@@ -43,7 +43,7 @@ class Gyroscope():
 	def __init__(self) -> None:
 		pass
 	
-	def read():
+	def read(self):
 		gyro_x = read_raw_bits(GYRO_XOUT_H)
 		gyro_y = read_raw_bits(GYRO_YOUT_H)
 		gyro_z = read_raw_bits(GYRO_ZOUT_H)
