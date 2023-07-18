@@ -18,11 +18,11 @@ def connect():
     initLoop()
 
 def initLoop ():
+    print("EMITING")
     while sio.handle_sigint:
         # try:
-        print("EMITING")
         data = sensor.read_data()
-        print(data)
+        # print(data)
 
         sio.emit('py-mpu',data)
 

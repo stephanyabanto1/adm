@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console</title>
+</head>
+<script src="https://cdn.plot.ly/plotly-2.24.1.min.js" charset="utf-8"></script>
+<body>
+    <div id="gyro" style="width:600px;height:250px;"></div>
+    <div id="accel" style="width:600px;height:250px;"></div>
+    <div id="mag" style="width:600px;height:250px;"></div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const RANGE = 400
+    const range = new Array(RANGE)
+    for(let i =0; i < range.length; i++){
+        range[i] = i
+    }
+
+    const gyroX = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "X"
+    }
+    const gyroY = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Y"
+    }
+    const gyroZ = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Z"
+    }
+
+    const accelX = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "X"
+    }
+    const accelY = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Y"
+    }
+    const accelZ = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Z"
+    }
+
+    const magX = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "X"
+    }
+    const magY = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Y"
+    }
+    const magZ = {
+        x: range,
+        y: [],
+        margin: {t: 0},
+        mode:"lines",
+        name: "Z"
+    }
+
+    const gyroData = [gyroX, gyroY, gyroZ]
+    const accelData = [accelX, accelY, accelZ]
+    const magData = [magX, magY, magZ]
+
+</script>
+<script> 
+    const gyroPlot = document.getElementById('gyro');
+    const accelPlot = document.getElementById('accel');
+    const magPlot = document.getElementById('mag');    
+</script>
+<script>
+    let i = 0;
+    const domain = (new URL(window.location.href));
+    
+    const socket = io(domain.host);
+    
+    socket.on("connect", () => {
+        socket.emit("ID", "console")
+    })
+
+
+    socket.on("py-data", (g,a,m) => {
+        cosnole.log(g,a,m)
+
+        i ++;
+        if(i < range.length) {
+            gyroData[0].y.push(g[0])
+            gyroData[1].y.push(g[1])
+            gyroData[2].y.push(g[2])
+
+            accelData[0].y.push(a[0])
+            accelData[1].y.push(a[1])
+            accelData[2].y.push(a[2])
+
+            magData[0].y.push(m[0])
+            magData[1].y.push(m[1])
+            magData[2].y.push(m[2])
+        } else {
+            gyroData[0].y.shift(g[0])
+            gyroData[1].y.shift(g[1])
+            gyroData[2].y.shift(g[2])
+
+            gyroData[0].y.push(g[0])
+            gyroData[1].y.push(g[1])
+            gyroData[2].y.push(g[2])
+
+            accelData[0].y.shift(a[0])
+            accelData[1].y.shift(a[1])
+            accelData[2].y.shift(a[2])
+            accelData[0].y. push(a[0])
+            accelData[1].y. push(a[1])
+            accelData[2].y. push(a[2])
+
+            magData[0].y.shift(m[0])
+            magData[1].y.shift(m[1])
+            magData[2].y.shift(m[2])
+            magData[0].y. push(m[0])
+            magData[1].y. push(m[1])
+            magData[2].y. push(m[2])
+        }
+        Plotly.newPlot( gyroPlot, gyroData, {title: "Gyroscope"});
+        Plotly.newPlot( accelPlot, accelData, {title: "Accelerometer"});
+        Plotly.newPlot( magPlot, magData, {title: "Magnetometer"});
+    })
+</script>
+</html>

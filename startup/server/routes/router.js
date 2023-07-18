@@ -10,6 +10,10 @@ module.exports = (app) => {
 
     app.use('/orientation', orientation)
 
+    app.get("/console", (req, res)=> {
+        res.sendFile(path.resolve(__dirname + viewPath + '/console/view.html'))
+    })
+
     app.get("/mouse-control", (req, res)=> {
         res.sendFile(path.resolve(__dirname + viewPath + '/mouse-control/view.html'))
     })

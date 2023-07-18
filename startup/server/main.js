@@ -26,21 +26,21 @@ function exec () {
       console.log("CONNECTION: ", id)
     })
 
-    socket.on("py-mpu", (data) => {
+    socket.on("py-mpu", (g, a, m) => {
       // console.log(data)
-      // io.emit('py-data', data)
-      let [gx, gy, gz, ax, ay,az,mx,my,mz, h] = data.split(',')
-      const gyro =    {x: parseFloat(gx), y:parseFloat(gy), z: parseFloat(gz)}
-      const accel =   {x: parseFloat(ax), y:parseFloat(ay), z: parseFloat(az)}
-      const mag =     {x: parseFloat(mz), y:parseFloat(my), z: parseFloat(mx)}
-      h=parseFloat(h);
+      io.emit('py-data', g,a,m)
+      // let [gx, gy, gz, ax, ay,az,mx,my,mz, h] = data.split(',')
+      // const gyro =    {x: parseFloat(gx), y:parseFloat(gy), z: parseFloat(gz)}
+      // const accel =   {x: parseFloat(ax), y:parseFloat(ay), z: parseFloat(az)}
+      // const mag =     {x: parseFloat(mz), y:parseFloat(my), z: parseFloat(mx)}
+      // h=parseFloat(h);
 
-      //AX12 CONV RATE 0 / 1023
+      // //AX12 CONV RATE 0 / 1023
 
-      //H -180 / 180
-      h = Math.trunc(((h+180)/360) * 1023)
+      // //H -180 / 180
+      // h = Math.trunc(((h+180)/360) * 1023)
       
-      io.emit('h-order', h)
+      // io.emit('h-order', h)
     })
 
     socket.on("orientation", (data)=> {
