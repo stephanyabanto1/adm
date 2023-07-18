@@ -26,38 +26,89 @@ AK8963_CNTL  = 0x0A
 
 bus =  smbus2.SMBus(1) # start comm with i2c bus
 
-def read_raw_bits(register):
-	# read accel and gyro values
-	high = bus.read_byte_data(MPU6050_ADDR, register)
-	low = bus.read_byte_data(MPU6050_ADDR, register+1)
-
-	# combine higha and low for unsigned bit value
-	value = ((high << 8) | low)
-	
-	# convert to +- value
-	if(value > 32768):
-		value -= 65536
-	return value
-
 class Gyroscope():
 	def __init__(self) -> None:
 		pass
 	
 	def read(self):
-		gyro_x = read_raw_bits(GYRO_XOUT_H)
-		gyro_y = read_raw_bits(GYRO_YOUT_H)
-		gyro_z = read_raw_bits(GYRO_ZOUT_H)
+		gyro_x = self.reader(GYRO_XOUT_H)
+		gyro_y = self.reader(GYRO_YOUT_H)
+		gyro_z = self.reader(GYRO_ZOUT_H)
 		return gyro_x, gyro_y, gyro_z
+
+	def reader(self, register):
+		# read accel and gyro values
+		high = bus.read_byte_data(MPU6050_ADDR, register)
+		low = bus.read_byte_data(MPU6050_ADDR, register+1)
+
+		# combine higha and low for unsigned bit value
+		value = ((high << 8) | low)
+		
+		# convert to +- value
+		if(value > 32768):
+			value -= 65536
+		return value
+
+class Accelerometer():
+	def __init__(self) -> None:
+		pass
+
+	def read(self):
+		# raw acceleration bits
+		acc_x = self.reader(ACCEL_XOUT_H)
+		acc_y = self.reader(ACCEL_YOUT_H)
+		acc_z = self.reader(ACCEL_ZOUT_H)
+		return acc_x, acc_y, acc_z
+
+	def reader(self, register):
+		# read accel and gyro values
+		high = bus.read_byte_data(MPU6050_ADDR, register)
+		low = bus.read_byte_data(MPU6050_ADDR, register+1)
+
+		# combine higha and low for unsigned bit value
+		value = ((high << 8) | low)
+		
+		# convert to +- value
+		if(value > 32768):
+			value -= 65536
+		return value
+
+class Magnetometer():
+	def __init__(self) -> None:
+		pass
+
+	def read(self):
+		mag_x = self.reader(HXH)
+		mag_y = self.reader(HYH)
+		mag_z = self.reader(HZH)
+		return mag_x, mag_y, mag_z
+
+	def reader(self, register):
+		# read magnetometer values
+		low = bus.read_byte_data(AK8963_ADDR, register-1)
+		high = bus.read_byte_data(AK8963_ADDR, register)
+		# combine higha and low for unsigned bit value
+		value = ((high << 8) | low)
+		# convert to +- value
+		if(value > 32768):
+			value -= 65536
+		return value
 
 class InertialSensor():
 	def __init__(self) -> None:
-		self.run_config()
+		self.run_MPU_config()
+		self.run_AK_config()
 		self.gyro = Gyroscope()
+		self.accel = Accelerometer()
+		self.mag = Magnetometer()
 
 	def read_data(self):
-		return self.gyro.read()
+		gyro = self.gyro.read()
+		accel = self.accel.read()
+		mag = self.mag.read()
+		return gyro, accel, mag
 
-	def run_config(self):
+	def run_MPU_config(self):
 		samp_rate_div = 0 # sample rate = 8 kHz/(1+samp_rate_div)
 		bus.write_byte_data(MPU6050_ADDR, SMPLRT_DIV, samp_rate_div)
 		time.sleep(0.1)
@@ -86,3 +137,11 @@ class InertialSensor():
 		bus.write_byte_data(MPU6050_ADDR, INT_ENABLE, 1)
 		time.sleep(0.1)
 	
+	def run_AK_config(self):
+		bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,0x00)
+		time.sleep(0.1)
+		AK8963_bit_res = 0b0001 # 0b0001 = 16-bit
+		AK8963_samp_rate = 0b0110 # 0b0010 = 8 Hz, 0b0110 = 100 Hz
+		AK8963_mode = (AK8963_bit_res <<4)+AK8963_samp_rate # bit conversion
+		bus.write_byte_data(AK8963_ADDR,AK8963_CNTL,AK8963_mode)
+		time.sleep(0.1)
