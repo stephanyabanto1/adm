@@ -1,7 +1,7 @@
 import time
 from Inertial import InertialSensor
 
-sensor = InertialSensor
+sensor = InertialSensor()
 
 while(True):
     time.sleep(0.1)

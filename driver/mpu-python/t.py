@@ -3,17 +3,17 @@ class Child:
         pass
 
     def run(self):
-        print("run")
+        return "run"
 
 class Parent:
     def __init__(self) -> None:
         self.child = Child()
     
     def run(self):
-        self.child.run()
+        return self.child.run()
 
 
 p = Parent()
 
-p.run()
+print(p.run())
 
