@@ -42,5 +42,5 @@ def initLoop ():
                  +','+mX+','+mY+','+mZ+','+h)
 
         
-sio.connect('http://192.168.2.12:3000')
+sio.connect('http://192.168.2.13:3000')
 sio.wait()
