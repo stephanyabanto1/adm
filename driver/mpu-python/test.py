@@ -1,8 +1,8 @@
 import time, socketio
-from Inertial import InertialSensor
+# from Inertial import InertialSensor
 
 sio = socketio.Client()
-sensor = InertialSensor()
+# sensor = InertialSensor()
 
 time.sleep(1) # delay necessary to allow mpu9250 to settle
 
@@ -21,10 +21,10 @@ def initLoop ():
     print("EMITING")
     while sio.handle_sigint:
         # try:
-        data = sensor.read_data()
+        # data = sensor.read_data()
         # print(data)
 
-        sio.emit('py-mpu',data)
+        sio.emit('py-mpu','data')
 
 sio.connect('http://192.168.2.13:3000')
 sio.wait()
