@@ -110,6 +110,7 @@
         i ++;
         if(i < range.length) {
             gyroData[0].y.push(g[0])
+
             gyroData[1].y.push(g[1])
             gyroData[2].y.push(g[2])
 
@@ -141,9 +142,9 @@
             magData[2].y.push(m[2])
         }
 
-        // Plotly.newPlot( gyroPlot, gyroData, {title: "Gyroscope"});
-        // Plotly.newPlot( accelPlot, accelData, {title: "Accelerometer"});
-        Plotly.newPlot( magPlot, magData, {title: "Magnetometer"});
+        Plotly.newPlot( gyroPlot, gyroData, {title: "Gyroscope"});
+        //Plotly.newPlot( accelPlot, accelData, {title: "Accelerometer"});
+        // Plotly.newPlot( magPlot, magData, {title: "Magnetometer"});
 
         //MULTIPLE PLOTS REDUCES RESPONCE TIME
     })
